@@ -19,19 +19,15 @@ import { Component } from '@angular/core';
   // `]
 })
 export class AppComponent {
-  title = 'hero';
-  heroName = '王逊';
-  testVal = '这是一个测试对应的值';
-
-  price = 100;
-
-  gender = 1;
-
-  get job(): string{
-    return '战士';
-  }
-
-  getVal(): number{
-    return 666;
-  }
+  madaoPic = '../assets/desk.png';
+  user = 'desk';
+  colspan = 3;
+  isDisabled = true;
+  customTitle = 'custom-title6666';
+  customTitle2 = 'customTitle2777';
+  customTitle3 = 'customTitle3888';
+  user2 = {
+    name: 'madao',
+    pic: this.madaoPic
+  };
 }
