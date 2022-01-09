@@ -19,5 +19,12 @@ import { Component } from '@angular/core';
   // `]
 })
 export class AppComponent {
+  showModal = false;
+  onConfirm(){
+    console.log('接收 onConfirm');
+  }
+  onClose(){
+    this.showModal = false;
+  }
 
 }

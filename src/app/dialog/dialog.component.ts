@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -6,29 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-
-  constructor() { }
-
+  constructor(){}
   ngOnInit(): void {
   }
 
-  onClick(str: string,event: MouseEvent):void{
-    console.log('onClick',str);
-    console.log('onClick event',event);
-    console.log('onClick event.target',event.target);
+  @Input('visible') show = false;
+  @Input() title = '';
+  @Input() confirmLable = '确定';
+  @Input() cancelLabel = '取消';
+  @Output('hide') closed = new EventEmitter<void>();
+  @Output() backdropClick = new EventEmitter<void>();
+  @Output() confirm = new EventEmitter<void>();
+
+  onConfirm(){
+    this.confirm.emit();
+  }
+  onClose(){
+    this.closed.emit();
   }
 
-  clickParent():void{
-    console.log('clickParent');
-  }
-
-  clickChildren(event:MouseEvent):void{
-    event.stopPropagation();
-    console.log('clickChildren');
-  }
-
-  onInput(event: Event):void{
-    console.log('onInput',event.target);
-    console.log('onInput',(event.target as HTMLInputElement).value);
-  }
 }
