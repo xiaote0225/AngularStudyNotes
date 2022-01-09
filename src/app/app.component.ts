@@ -19,18 +19,5 @@ import { Component } from '@angular/core';
   // `]
 })
 export class AppComponent {
-  isPrimary = true;
-  btnCls = 'btn btn-primary';
-  btnCls2 = ['btn','btn-primary'];
-  btnCls3 = {
-    'btn': true,
-    'btn-primary': true
-  }
 
-  style1 = 'color: red;border: 1px solid';
-  style2 = ['width','100px'];
-  style3 = {
-    color: '#bf3349',
-    backgroundColor: '#e0ff95'
-  }
 }
