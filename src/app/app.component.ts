@@ -19,15 +19,18 @@ import { Component } from '@angular/core';
   // `]
 })
 export class AppComponent {
-  madaoPic = '../assets/desk.png';
-  user = 'desk';
-  colspan = 3;
-  isDisabled = true;
-  customTitle = 'custom-title6666';
-  customTitle2 = 'customTitle2777';
-  customTitle3 = 'customTitle3888';
-  user2 = {
-    name: 'madao',
-    pic: this.madaoPic
-  };
+  isPrimary = true;
+  btnCls = 'btn btn-primary';
+  btnCls2 = ['btn','btn-primary'];
+  btnCls3 = {
+    'btn': true,
+    'btn-primary': true
+  }
+
+  style1 = 'color: red;border: 1px solid';
+  style2 = ['width','100px'];
+  style3 = {
+    color: '#bf3349',
+    backgroundColor: '#e0ff95'
+  }
 }
