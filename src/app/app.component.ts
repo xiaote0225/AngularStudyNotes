@@ -19,17 +19,6 @@ import { NgModel } from '@angular/forms';
   //   }
   // `]
 })
-export class AppComponent implements OnInit {
-  condition = true;
-  condition1 = true;
-  condition2 = true;
-  condition3 = true;
-
-  condition3Ref!: TemplateRef<any>;
-  @ViewChild('condition3Tempate',{static:true}) condition3Tempate!: TemplateRef<any>;
-
-  ngOnInit(): void {
-    console.log('condition3Tempate',this.condition3Tempate);
-    this.condition3Ref = this.condition3Tempate;
-  }
+export class AppComponent{
+  fruit = '';
 }
