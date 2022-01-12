@@ -1,14 +1,22 @@
-<input [(ngModel)]="name" #ctrl="ngModel" required>
-<p>value: {{name}}</p>
-<p>valid: {{ctrl.valid}}</p>
-<button (click)="setValue()">set value</button>
-<hr>
-<form>
-  <input [(ngModel)]="engName" name="engName">
-  <input [(ngModel)]="chName" [ngModelOptions]="{standalone:true}">
-</form>
-<hr>
-<input type="text" [ngModel]="expandVal" (ngModelChange)="expandVal = $event">
-<p>expandVal is {{expandVal}}</p>
-<hr>
-<button (click)="getModel()">getModel</button>
+<h1>基本使用</h1>
+<div *ngIf="condition">jdlksjflsdjal</div>
+<button (click)="condition = !condition">toggle</button>
+<h1>扩展写法</h1>
+<ng-template [ngIf]="condition">
+  <div>test content</div>
+</ng-template>
+<h1>ngIfElse</h1>
+<button (click)="condition1 = !condition1">toggel</button>
+<div *ngIf="condition1 else condition1EleRef">condition1 is ture</div>
+<ng-template #condition1EleRef>
+  <div>condition1 is false</div>
+</ng-template>
+<h1>ngIfThen</h1>
+<button (click)="condition2 = !condition2">toggle2</button>
+<div *ngIf="condition2 then condition2TrueRef else condition2FalseRef"></div>
+<ng-template #condition2TrueRef>condition2TrueRef</ng-template>
+<ng-template #condition2FalseRef>condition2FalseRef</ng-template>
+<h1>使用TemplateRef</h1>
+<button (click)="condition3 = !condition3">toggle3</button>
+<div *ngIf="condition3 else condition3Ref">condition3 is true</div>
+<ng-template #condition3Tempate>condition3 is false</ng-template>

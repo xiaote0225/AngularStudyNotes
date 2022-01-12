@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgModule } from '@angular/core';
+import { Component, ViewChild, NgModule, TemplateRef, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
 @Component({
@@ -19,25 +19,17 @@ import { NgModel } from '@angular/forms';
   //   }
   // `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  condition = true;
+  condition1 = true;
+  condition2 = true;
+  condition3 = true;
 
-  @ViewChild(NgModel) private ngModel!: NgModel;
+  condition3Ref!: TemplateRef<any>;
+  @ViewChild('condition3Tempate',{static:true}) condition3Tempate!: TemplateRef<any>;
 
-  name: string = '12';
-  engName = 'mike';
-  chName = '中国';
-  expandVal = '';
-
-  setValue():void{
-    this.name = "setValue";
+  ngOnInit(): void {
+    console.log('condition3Tempate',this.condition3Tempate);
+    this.condition3Ref = this.condition3Tempate;
   }
-
-  getModel():void{
-    console.log(this.ngModel);
-  }
-
-  setModel():void{
-
-  }
-
 }
