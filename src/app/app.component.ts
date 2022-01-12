@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, NgModule } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,24 @@ import { Component } from '@angular/core';
   // `]
 })
 export class AppComponent {
-  size = 16;
+
+  @ViewChild(NgModel) private ngModel!: NgModel;
+
+  name: string = '12';
+  engName = 'mike';
+  chName = '中国';
+  expandVal = '';
+
+  setValue():void{
+    this.name = "setValue";
+  }
+
+  getModel():void{
+    console.log(this.ngModel);
+  }
+
+  setModel():void{
+
+  }
 
 }

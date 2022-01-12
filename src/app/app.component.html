@@ -1,1 +1,14 @@
-<app-sizer [(size)]="size"></app-sizer>
+<input [(ngModel)]="name" #ctrl="ngModel" required>
+<p>value: {{name}}</p>
+<p>valid: {{ctrl.valid}}</p>
+<button (click)="setValue()">set value</button>
+<hr>
+<form>
+  <input [(ngModel)]="engName" name="engName">
+  <input [(ngModel)]="chName" [ngModelOptions]="{standalone:true}">
+</form>
+<hr>
+<input type="text" [ngModel]="expandVal" (ngModelChange)="expandVal = $event">
+<p>expandVal is {{expandVal}}</p>
+<hr>
+<button (click)="getModel()">getModel</button>
