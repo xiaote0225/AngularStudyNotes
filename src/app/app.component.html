@@ -1,16 +1,22 @@
-<p><input type="radio" name="fruit" value="apple" [(ngModel)]="fruit">apple</p>
-<p><input type="radio" name="fruit" value="banana" [(ngModel)]="fruit">banana</p>
-<p><input type="radio" name="fruit" value="orange" [(ngModel)]="fruit">orange</p>
-<p><input type="radio" name="fruit" value="grape" [(ngModel)]="fruit">grape</p>
-<p><input type="radio" name="fruit" value="waterballon" [(ngModel)]="fruit">waterballon</p>
+<input [(ngModel)]="value" (keyup.enter)="add()">
+<button (click)="add()">增加</button>
+<button (click)="reset()">Reset</button>
 <hr>
-<div>fruit is {{fruit}}</div>
+value:{{value}}
 <hr>
-<div [ngSwitch]="fruit">
-  <div *ngSwitchCase="'apple'">fruit is apple</div>
-  <div *ngSwitchCase="'banana'">fruit is banana</div>
-  <div *ngSwitchCase="'orange'">fruit is orange</div>
-  <div *ngSwitchCase="'grape'">fruit is grape</div>
-  <div *ngSwitchCase="'waterballon'">fruit is waterballon</div>
-  <div *ngSwitchDefault>ngSwitchDefault</div>
-</div>
+heros:{{heros | json}}
+<hr>
+<ul>
+  <li *ngFor="let item of heros;tracby:trackByHero;index as i;let len = count;let ev = even;let od = odd;let f = first;let l = last;" [class.even]="ev" [class.odd]="od">
+    <!-- <p>{{item.id}}--{{item.name}}</p> -->
+    {{item.id}}
+    <p>i:{{i}}</p>
+    <p>len:{{len}}</p>
+    <p>od:{{od}}</p>
+    <p>ev:{{ev}}</p>
+    <p>f:{{f}}</p>
+    <p>l:{{l}}</p>
+  </li>
+</ul>
+<hr>
+<div *ngFor="let item of heros;tracby:trackByHero">{{item.id}}</div>
