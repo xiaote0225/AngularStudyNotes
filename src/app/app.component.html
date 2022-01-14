@@ -7,7 +7,7 @@ value:{{value}}
 heros:{{heros | json}}
 <hr>
 <ul>
-  <li *ngFor="let item of heros;tracby:trackByHero;index as i;let len = count;let ev = even;let od = odd;let f = first;let l = last;" [class.even]="ev" [class.odd]="od">
+  <li *ngFor="let item of heros;trackBy:trackByHero;index as i;let len = count;let ev = even;let od = odd;let f = first;let l = last;" [class.even]="ev" [class.odd]="od">
     <!-- <p>{{item.id}}--{{item.name}}</p> -->
     {{item.id}}
     <p>i:{{i}}</p>
@@ -19,4 +19,5 @@ heros:{{heros | json}}
   </li>
 </ul>
 <hr>
-<div *ngFor="let item of heros;tracby:trackByHero">{{item.id}}</div>
+<div *ngFor="let item of heros;trackBy:trackByHero">{{item.id}}</div>
+<button (click)="reset()">Reset</button>

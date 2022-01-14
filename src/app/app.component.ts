@@ -48,7 +48,7 @@ export class AppComponent{
       {name:'hero10',id:1010},
     ];
   }
-  trackByHero(hero:Hero):string{
+  trackByHero(index:number,hero:Hero):string{
     return hero.name;
   }
 }
