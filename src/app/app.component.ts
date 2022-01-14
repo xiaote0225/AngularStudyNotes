@@ -24,11 +24,27 @@ export interface Hero{
   // `]
 })
 export class AppComponent{
-  size = 10;
-  callPhone(val:string):void{
-    console.log('callPhone',val);
+  title = '1abcDDDjjjkl';
+  obj = {
+    name:'name001',
+    age:17
   }
-  callName(val:string):void{
-    console.log('callName',val);
+  now = Date.now();
+  hero:Hero;
+  noNullStr: string | null = '';
+  item:Hero = {id:888,name:'基督教案例'}
+  constructor(){
+    setTimeout(() => {
+      this.hero = {
+        id:444,
+        name:'hero_001'
+      };
+    },3000);
+    // 不报错,告诉ts,this.name一定不是null
+    const heroNameStr:string = this.noNullStr!;
+    // 以上写法相当于
+    if(this.noNullStr){
+      const heroNameStr: string = this.noNullStr;
+    }
   }
 }

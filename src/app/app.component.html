@@ -1,15 +1,16 @@
-<h1>基本使用</h1>
-<input type="text" #phone placeholder="phone number">
-<button (click)="callPhone(phone.value)">66666</button>
-{{phone}}
-<h1>ref</h1>
-<input type="text" ref-name placeholder="name">
-<button (click)="callName(name.value)">888</button>
-<h1>引用组件</h1>
-<app-sizer [(size)]="size" #sizeRef></app-sizer>
-<button (click)="sizeRef.add()">size增加</button>
-<button (click)="sizeRef.desc()">size减小</button>
-<p>size:{{size}}</p>
-<p>
-  sizeRef:{{sizeRef}}
-</p>
+<h1>管道</h1>
+<p>title upperCasePipe: {{title | uppercase}}</p>
+<p>title uppercase lowercase:{{title | uppercase | lowercase}}</p>
+<p>obj:{{obj}}</p>
+<p>obj:{{obj | json}}</p>
+<h1>带参数的管道</h1>
+<p>now:{{now}}</p>
+<p>now | date : {{now | date}}</p>
+<p>now | date : {{now | date:'longDate'}}</p>
+<p>now | date : {{now | date:'yyyy-MM-dd'}}</p>
+<h1>安全导航运算符?</h1>
+<p>hero:{{hero?.name}}</p>
+<p>hero:{{hero?.name}}</p>
+<h1>非空断言(!)</h1>
+<h1>类型转换函数$any()</h1>
+<p>The item's undeclared best by date is:{{$any(item).jjjj}}</p>
