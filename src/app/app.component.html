@@ -1,22 +1,15 @@
-<input [(ngModel)]="value" (keyup.enter)="add()">
-<button (click)="add()">增加</button>
-<button (click)="reset()">Reset</button>
-<hr>
-value:{{value}}
-<hr>
-heros:{{heros | json}}
-<hr>
-<ul>
-  <li *ngFor="let item of heros;tracby:trackByHero;index as i;let len = count;let ev = even;let od = odd;let f = first;let l = last;" [class.even]="ev" [class.odd]="od">
-    <!-- <p>{{item.id}}--{{item.name}}</p> -->
-    {{item.id}}
-    <p>i:{{i}}</p>
-    <p>len:{{len}}</p>
-    <p>od:{{od}}</p>
-    <p>ev:{{ev}}</p>
-    <p>f:{{f}}</p>
-    <p>l:{{l}}</p>
-  </li>
-</ul>
-<hr>
-<div *ngFor="let item of heros;tracby:trackByHero">{{item.id}}</div>
+<h1>基本使用</h1>
+<input type="text" #phone placeholder="phone number">
+<button (click)="callPhone(phone.value)">66666</button>
+{{phone}}
+<h1>ref</h1>
+<input type="text" ref-name placeholder="name">
+<button (click)="callName(name.value)">888</button>
+<h1>引用组件</h1>
+<app-sizer [(size)]="size" #sizeRef></app-sizer>
+<button (click)="sizeRef.add()">size增加</button>
+<button (click)="sizeRef.desc()">size减小</button>
+<p>size:{{size}}</p>
+<p>
+  sizeRef:{{sizeRef}}
+</p>

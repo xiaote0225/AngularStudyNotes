@@ -24,31 +24,11 @@ export interface Hero{
   // `]
 })
 export class AppComponent{
-  heros:Hero[] = Heroes;
-  value = '';
-  time:any = null;
-  add():void{
-    const count = this.heros.length + 1;
-    this.heros.push({
-      id: count,
-      name: this.value
-    });
+  size = 10;
+  callPhone(val:string):void{
+    console.log('callPhone',val);
   }
-  reset():void{
-    this.heros = [
-      {name:'hero01',id:1},
-      {name:'hero02',id:22},
-      {name:'hero03',id:3},
-      {name:'hero04',id:44},
-      {name:'hero05',id:5},
-      {name:'hero06',id:66},
-      {name:'hero07',id:7},
-      {name:'hero08',id:88},
-      {name:'hero09',id:9},
-      {name:'hero10',id:1010},
-    ];
-  }
-  trackByHero(hero:Hero):string{
-    return hero.name;
+  callName(val:string):void{
+    console.log('callName',val);
   }
 }
