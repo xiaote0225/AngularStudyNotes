@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SizerComponent } from './sizer/sizer.component';
+import { TransferPanelComponent } from './transfer-panel/transfer-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SizerComponent
+    SizerComponent,
+    TransferPanelComponent
   ],
   imports: [
     BrowserModule,

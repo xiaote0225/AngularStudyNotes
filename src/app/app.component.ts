@@ -1,3 +1,4 @@
+import { TransferItem } from './transfer-panel/types';
 import { Component, ViewChild, NgModule, TemplateRef, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Heroes } from './configs/heroes';
@@ -24,27 +25,22 @@ export interface Hero{
   // `]
 })
 export class AppComponent{
-  title = '1abcDDDjjjkl';
-  obj = {
-    name:'name001',
-    age:17
-  }
-  now = Date.now();
-  hero:Hero;
-  noNullStr: string | null = '';
-  item:Hero = {id:888,name:'基督教案例'}
+  list: TransferItem[] = [];
   constructor(){
-    setTimeout(() => {
-      this.hero = {
-        id:444,
-        name:'hero_001'
-      };
-    },3000);
-    // 不报错,告诉ts,this.name一定不是null
-    const heroNameStr:string = this.noNullStr!;
-    // 以上写法相当于
-    if(this.noNullStr){
-      const heroNameStr: string = this.noNullStr;
+    this.setList();
+  }
+  onChanged(selecteds: TransferItem[]):void{
+    console.log('onChanged',selecteds);
+  }
+  setList(){
+    this.list = [];
+    const prefix = 'item' + Date.now().toString().slice(-3);
+    for(let i = 0; i < 20 ; i++){
+      this.list.push({
+        key: prefix + '_' + i,
+        value: `${prefix}${i+1}`,
+        checked: i % 6 === 0
+      });
     }
   }
 }
