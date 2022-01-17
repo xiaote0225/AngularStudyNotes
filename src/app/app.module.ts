@@ -8,6 +8,7 @@ import { SizerComponent } from './sizer/sizer.component';
 import { TransferPanelComponent } from './transfer-panel/transfer-panel.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HerosComponent } from './pages/heros/heros.component';
+import { HighlightDirective } from './demos/directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HerosComponent } from './pages/heros/heros.component';
     SizerComponent,
     TransferPanelComponent,
     LayoutComponent,
-    HerosComponent
+    HerosComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
