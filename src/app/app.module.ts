@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SizerComponent } from './sizer/sizer.component';
 import { TransferPanelComponent } from './transfer-panel/transfer-panel.component';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { HerosComponent } from './pages/heros/heros.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SizerComponent,
-    TransferPanelComponent
+    TransferPanelComponent,
+    LayoutComponent,
+    HerosComponent
   ],
   imports: [
     BrowserModule,
