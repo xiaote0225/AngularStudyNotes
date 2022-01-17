@@ -1,0 +1,12 @@
+<div class="demo">
+  <section class="m-auto">
+    <!-- <app-structural></app-structural> -->
+    <section>
+      <h3>unless</h3>
+      <button (click)="showUnless = !showUnless">toggle unless {{showUnless}}</button>
+      <p *appUnless="showUnless">测试unless directive---{{showUnless}}</p>
+      <p *appUnless="showUnless as un">测试unless directive---{{un}}</p>
+      <p *appUnless="showUnless;let un;let attr=attr;">测试unless directive alias let un---{{un}} attr: {{attr}}</p>
+    </section>
+  </section>
+</div>

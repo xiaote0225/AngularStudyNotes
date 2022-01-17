@@ -1,0 +1,61 @@
+<h1>ngIf</h1>
+<button (click)="show = !show">toggle</button>
+<p *ngIf="show as aa">一段文字aa,{{aa}}</p>
+<p *ngIf="show;let f">一段文字f,{{f}}</p>
+<ng-template [ngIf]="show" let-aa="ngIf">
+  <p>一段文字{{aa}}</p>
+</ng-template>
+<h1>ngSwitch</h1>
+<div class="content" [ngSwitch]="fruit">
+  <p *ngSwitchCase="'apple'">苹果</p>
+  <p *ngSwitchCase="'pear'">梨</p>
+  <p *ngSwitchCase="'grape'">葡萄</p>
+  <p *ngSwitchDefault>啥都不是</p>
+</div>
+<hr>
+<div class="content" [ngSwitch]="fruit">
+  <ng-template ngSwitchCase="apple">
+    <p>这是苹果</p>
+  </ng-template>
+  <ng-template ngSwitchCase="pear">
+    <p>这是梨</p>
+  </ng-template>
+  <ng-template ngSwitchCase="grape">
+    <p>这是葡萄</p>
+  </ng-template>
+  <ng-template ngSwitchDefault>
+    <p>啥都不是</p>
+  </ng-template>
+</div>
+<h1>ngFor</h1>
+<!-- <ul class="list">
+  <li *ngFor="let item of heros;index as i;count as len;let ev = even;let od = odd;let f = first;let l = last;trackBy:trackByHero" [class.even]="ev" [class.odd]="od">
+    <p>index:{{i}}</p>
+    <p>count:{{len}}</p>
+    <p>name:{{item.name}}</p>
+    <p>first:{{f}}----last:{{l}}</p>
+  </li>
+</ul> -->
+<ul class="list">
+  <ng-template ngFor [ngForOf]="heros" let-item let-i="index" let-len="count" let-ev="even" let-od="odd" let-f="first" let-l="last" [ngForTrackBy]="trackByHero">
+    <li [class.even]="ev" [class.odd]="od">
+      <p>index:{{i}}</p>
+      <p>count:{{len}}</p>
+      <p>name:{{item.name}}</p>
+      <p>first:{{f}} --- last:{{l}}</p>
+    </li>
+  </ng-template>
+</ul>
+<h1>ng-template</h1>
+<p>Hip!</p>
+<ng-template [ngIf]="true">
+  <p>Mid!</p>
+</ng-template>
+<p>Hooray!</p>
+<h1>ng-container</h1>
+<p>kjdjjf
+  <ng-container *ngIf="true">
+    jkflsja
+  </ng-container>
+  jsdflkjflj
+</p>
