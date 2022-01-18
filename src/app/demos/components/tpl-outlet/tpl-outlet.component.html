@@ -1,5 +1,6 @@
 <p>tpl-outlet works!--start</p>
-<ng-container *ngTemplateOutlet="render || defaultRef;context:context"></ng-container>
+<!-- <ng-container *ngTemplateOutlet="render || defaultRef;context:context"></ng-container> -->
+<ng-template *ngTemplateOutlet="render || defaultRef;context:context"></ng-template>
 <ng-template #defaultRef let-default let-val="value">
   <p>这个是默认的模板,default:{{default}},val:{{val}}</p>
 </ng-template>
