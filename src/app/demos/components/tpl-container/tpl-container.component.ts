@@ -84,6 +84,10 @@ export class TplContainerComponent implements OnInit {
     // console.log('thirdTpl',this.thirdTpl);
     // console.log('fourthTpl',this.fourthTpl);
     // console.log('freeTpl',this.freeTpl);
+    setTimeout(() => {
+      this.firstContain.createEmbeddedView(this.firstTpl);
+      this.firstContain.createEmbeddedView(this.secondTpl,this.context);
+    },0);
   }
 
   ngOnInit(): void {
