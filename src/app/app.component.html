@@ -1,8 +1,16 @@
-<app-tpl-outlet [render]="renderRef"></app-tpl-outlet>
-<ng-template #renderRef let-default let-val="value">
-  <p>renderRef</p>
-  <h1>value</h1>
-  <div>default:{{default}}</div>
-  <div>val:{{val}}</div>
-</ng-template>
-
+<app-shadow>
+  <div class="head">
+    这里是头部的内容
+  </div>
+  <div content>
+    这是conent属性选中的内容
+  </div>
+  <article>这是article标签选中的内容</article>
+  <div class="body">
+    <h2>example</h2>
+    这里是默认的主体内容
+  </div>
+  <div class="foot">
+    这里是底部的内容
+  </div>
+</app-shadow>

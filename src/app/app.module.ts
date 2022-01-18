@@ -14,6 +14,7 @@ import { ExampleComponent } from './demos/example/example.component';
 import { UnlessDirective } from './demos/directives/unless.directive';
 import { TplContainerComponent } from './demos/components/tpl-container/tpl-container.component';
 import { TplOutletComponent } from './demos/components/tpl-outlet/tpl-outlet.component';
+import { ShadowComponent } from './demos/components/shadow/shadow.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TplOutletComponent } from './demos/components/tpl-outlet/tpl-outlet.com
     ExampleComponent,
     UnlessDirective,
     TplContainerComponent,
-    TplOutletComponent
+    TplOutletComponent,
+    ShadowComponent
   ],
   imports: [
     BrowserModule,
