@@ -17,6 +17,8 @@ import { TplOutletComponent } from './demos/components/tpl-outlet/tpl-outlet.com
 import { ShadowComponent } from './demos/components/shadow/shadow.component';
 import { PanelComponent } from './demos/components/view-child/panel/panel.component';
 import { ViewChildComponent } from './demos/components/view-child/view-child.component';
+import { ContentChildComponent } from './demos/components/content-child/content-child.component';
+import { ChidComponentComponent } from './demos/components/content-child/chid-component/chid-component.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ViewChildComponent } from './demos/components/view-child/view-child.com
     TplOutletComponent,
     ShadowComponent,
     PanelComponent,
-    ViewChildComponent
+    ViewChildComponent,
+    ContentChildComponent,
+    ChidComponentComponent
   ],
   imports: [
     BrowserModule,
