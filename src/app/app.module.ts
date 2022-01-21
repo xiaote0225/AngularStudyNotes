@@ -22,6 +22,7 @@ import { ChidComponentComponent } from './demos/components/content-child/chid-co
 import { PipeComponent } from './demos/components/pipe/pipe.component';
 import { ExponentialStrengthPipe } from './demos/pipes/exponential-strength.pipe';
 import { FlyingHeroesImpurePipe } from './demos/pipes/flying-heroes-impure.pipe';
+import { LifeCycleComponent } from './demos/components/life-cycle/life-cycle.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FlyingHeroesImpurePipe } from './demos/pipes/flying-heroes-impure.pipe'
     ChidComponentComponent,
     PipeComponent,
     ExponentialStrengthPipe,
-    FlyingHeroesImpurePipe
+    FlyingHeroesImpurePipe,
+    LifeCycleComponent
   ],
   imports: [
     BrowserModule,

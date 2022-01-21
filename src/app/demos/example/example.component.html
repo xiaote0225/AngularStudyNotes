@@ -1,1 +1,9 @@
-<app-pipe></app-pipe>
+<div class="demo">
+  <section class="m-auto">
+    <button class="btn btn-primary" (click)="showLife = !showLife">toggle life</button>
+    <button (click)="$event;">click</button>
+    <app-life-cycle title="一个测试的title" *ngIf="showLife">
+      <div>content 内容----</div>
+    </app-life-cycle>
+  </section>
+</div>
