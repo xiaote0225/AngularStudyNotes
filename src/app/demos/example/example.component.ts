@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExampleComponent implements OnInit {
 
-  showLife = true;
 
   constructor() { }
 

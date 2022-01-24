@@ -1,7 +1,4 @@
-import { TransferItem } from './transfer-panel/types';
-import { Component, ViewChild, NgModule, TemplateRef, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
-import { Heroes } from './configs/heroes';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 export interface Hero{
   name:string;
   id:number;
@@ -9,7 +6,8 @@ export interface Hero{
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
   // template: `
   //   <h1 class="title">{{title}}</h1>
   //   <p>name666:{{heroName}}</p>
