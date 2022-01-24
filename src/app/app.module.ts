@@ -26,6 +26,8 @@ import { LifeCycleComponent } from './demos/components/life-cycle/life-cycle.com
 import { ChangeChildComponent } from './demos/components/change-detection/change-child/change-child.component';
 import { ChangeGrandsonComponent } from './demos/components/change-detection/change-grandson/change-grandson.component';
 import { ChangeComponent } from './demos/components/change-detection/change/change.component';
+import { StyleComponent } from './demos/components/style/style.component';
+import { Style1Component } from './demos/components/style1/style1.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { ChangeComponent } from './demos/components/change-detection/change/chan
     LifeCycleComponent,
     ChangeChildComponent,
     ChangeGrandsonComponent,
-    ChangeComponent
+    ChangeComponent,
+    StyleComponent,
+    Style1Component
   ],
   imports: [
     BrowserModule,
