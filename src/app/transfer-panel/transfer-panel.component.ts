@@ -5,7 +5,7 @@ import { TransferItem } from './types';
   selector: 'app-transfer-panel',
   templateUrl: './transfer-panel.component.html',
   styleUrls: ['./transfer-panel.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransferPanelComponent implements OnInit {
 
@@ -13,7 +13,8 @@ export class TransferPanelComponent implements OnInit {
   @Input() search = false;
   showList: TransferItem[] = [];
   selecteds: TransferItem[] = [];
-  @Output() changed = new EventEmitter<TransferItem[]>();
+  // @Output() changed = new EventEmitter<TransferItem[]>();
+  @Output() select = new EventEmitter<number>();
   constructor() {
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,14 +45,16 @@ export class TransferPanelComponent implements OnInit {
   trackByItem(index:number,obj:TransferItem):string{
     return obj.key;
   }
-  itemClick(target:TransferItem):void{
-    const index = this.targetIndex(target.key);
-    if(index > -1){
-      this.selecteds.splice(index,1);
-    }else{
-      this.selecteds.push(target);
-    }
-    this.changed.emit(this.selecteds);
+  // itemClick(target:TransferItem):void{
+  itemClick(index:number):void{
+    // const index = this.targetIndex(target.key);
+    // if(index > -1){
+    //   this.selecteds.splice(index,1);
+    // }else{
+    //   this.selecteds.push(target);
+    // }
+    // this.changed.emit(this.selecteds);
+    this.select.emit(index);
   }
   targetIndex(key:string):number{
     return this.selecteds.findIndex(item => item.key === key);

@@ -1,2 +1,7 @@
-<button class="btn btn-primary" (click)="setList()">reset list</button>
-<app-transfer-panel [search]="true" [list]="list" (changed)="onChanged($event)"></app-transfer-panel>
+<div class="demo-sec">
+  <div class="panel">
+    <button class="btn btn-primary" (click)="setList()">reset list</button>
+    <!-- <app-transfer-panel [search]="true" [list]="list" (changed)="onChanged($event)"></app-transfer-panel> -->
+    <app-transfer [sourceData]="list" [search]="true"></app-transfer>
+  </div>
+</div>
