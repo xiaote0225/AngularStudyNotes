@@ -28,6 +28,7 @@ import { ChangeGrandsonComponent } from './demos/components/change-detection/cha
 import { ChangeComponent } from './demos/components/change-detection/change/change.component';
 import { StyleComponent } from './demos/components/style/style.component';
 import { Style1Component } from './demos/components/style1/style1.component';
+import { AlertComponent } from './demos/components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { Style1Component } from './demos/components/style1/style1.component';
     ChangeGrandsonComponent,
     ChangeComponent,
     StyleComponent,
-    Style1Component
+    Style1Component,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
