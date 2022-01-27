@@ -1,3 +1,5 @@
+import { InjectionToken } from "@angular/core";
+
 export interface HeroArg {
   name: string;
   job: string;
@@ -18,3 +20,11 @@ export interface Hero {
   email?: string;
   brief?: string;
 }
+
+
+export interface AppConfig{
+  apiEndpoint:string;
+  title:string;
+}
+
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
