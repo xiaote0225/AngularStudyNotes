@@ -28,3 +28,4 @@ export interface AppConfig{
 }
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+

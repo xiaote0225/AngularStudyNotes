@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert/alert.component';
 import { Style1Component } from './style1/style1.component';
 import { StyleComponent } from './style/style.component';
-import { ChangeComponent } from './change-detection/change/change.component';
 import { ChangeGrandsonComponent } from './change-detection/change-grandson/change-grandson.component';
 import { ChangeChildComponent } from './change-detection/change-child/change-child.component';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
@@ -21,6 +20,13 @@ import { StructuralComponent } from './structural/structural.component';
 import { TransferPanelComponent } from 'src/app/transfer-panel/transfer-panel.component';
 import { SizerComponent } from 'src/app/sizer/sizer.component';
 import { FormsModule } from '@angular/forms';
+import { FlowerComponent } from './test-service/flower/flower.component';
+import { MobileItemComponent } from './test-service/mobile/mobile-item/mobile-item.component';
+import { MobileContentComponent } from './test-service/mobile/mobile-list/mobile-content/mobile-content.component';
+import { MobileListComponent } from './test-service/mobile/mobile-list/mobile-list.component';
+import { MobileComponent } from './test-service/mobile/mobile.component';
+import { MobileDirective } from './test-service/mobile/mobile.directive';
+import { ChangeComponent } from './change-detection/change/change.component';
 
 const declarations = [
   SizerComponent,
@@ -41,7 +47,13 @@ const declarations = [
   ChangeComponent,
   StyleComponent,
   Style1Component,
-  AlertComponent
+  AlertComponent,
+  FlowerComponent,
+  MobileItemComponent,
+  MobileContentComponent,
+  MobileListComponent,
+  MobileComponent,
+  MobileDirective
 ];
 
 @NgModule({
@@ -51,6 +63,9 @@ const declarations = [
     PipeModule,
     FormsModule
   ],
-  exports:declarations
+  exports:declarations,
+  providers:[
+    // {provide:'listToken',useValue:'listToken666'}
+  ]
 })
 export class ComponentsModule { }

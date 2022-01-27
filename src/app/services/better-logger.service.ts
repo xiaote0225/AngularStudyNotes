@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BetterLoggerService {
-
+  flower:string = 'BetterLoggerService flower';
   constructor() { }
 
   log(message:string){
