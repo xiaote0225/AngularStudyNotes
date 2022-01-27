@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ComponentsModule } from '../../components.module';
-export interface Mobile{
-  id:string;
-  name:string;
-}
+import { Mobile } from './mobile.service';
 
-@Injectable()
-export class MobileService {
+@Injectable({
+  providedIn: ComponentsModule
+})
+export class Mobile2Service {
   private mobiles:Mobile[] = [
     {
       id:'m1',

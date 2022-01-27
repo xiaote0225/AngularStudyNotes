@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { listToken } from './mobile-list/mobile-list.component';
 import { MobileService } from './mobile.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { MobileService } from './mobile.service';
   `,
   styles: [
   ],
-  providers:[MobileService]
+  providers:[MobileService,{ provide: listToken, useValue: 'app-mobile' }]
 })
 export class MobileComponent implements OnInit {
 

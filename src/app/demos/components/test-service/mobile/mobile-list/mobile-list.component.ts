@@ -18,7 +18,7 @@ export const listToken = new InjectionToken<string>('list token');
   `,
   styles: [
   ],
-  viewProviders: [{ provide: listToken, useValue: '这是list提供的value' }]
+  viewProviders: [{ provide: listToken, useValue: 'app-mobile-list' }]
 })
 export class MobileListComponent implements OnInit {
   mobiles: Mobile[] = [];

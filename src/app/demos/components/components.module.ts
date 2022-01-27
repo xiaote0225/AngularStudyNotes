@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { FlowerComponent } from './test-service/flower/flower.component';
 import { MobileItemComponent } from './test-service/mobile/mobile-item/mobile-item.component';
 import { MobileContentComponent } from './test-service/mobile/mobile-list/mobile-content/mobile-content.component';
-import { MobileListComponent } from './test-service/mobile/mobile-list/mobile-list.component';
+import { listToken, MobileListComponent } from './test-service/mobile/mobile-list/mobile-list.component';
 import { MobileComponent } from './test-service/mobile/mobile.component';
 import { MobileDirective } from './test-service/mobile/mobile.directive';
 import { ChangeComponent } from './change-detection/change/change.component';
@@ -65,7 +65,7 @@ const declarations = [
   ],
   exports:declarations,
   providers:[
-    // {provide:'listToken',useValue:'listToken666'}
+    // {provide:listToken,useValue:'components.module.ts'}
   ]
 })
 export class ComponentsModule { }

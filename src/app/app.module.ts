@@ -12,6 +12,7 @@ import { BetterLoggerService } from './services/better-logger.service';
 import { APP_CONFIG } from './configs/types';
 import { UserService } from './services/user.service';
 import { UserLoggerService } from './services/user-logger.service';
+import { listToken } from './demos/components/test-service/mobile/mobile-list/mobile-list.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserLoggerService } from './services/user-logger.service';
         return new UserLoggerService(userService)
       },
       deps:[UserService]
-    }
+    },
+    // {provide:listToken,useValue:'app.module.ts'}
   ],
   bootstrap: [AppComponent],
   exports: [
