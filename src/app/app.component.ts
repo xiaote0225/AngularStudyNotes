@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 export interface Hero{
   name:string;
-  id:number;
+  id:number|string;
 }
 @Component({
   selector: 'app-root',

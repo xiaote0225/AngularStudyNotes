@@ -1,3 +1,4 @@
+import { HeroService } from 'src/app/services/hero.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,7 +17,10 @@ import { PagesModule } from './pages/pages.module';
     DemoModule,
     PagesModule
   ],
-  providers: [],
+  providers: [
+    // {provide:HeroService,useClass:HeroService}
+    HeroService
+  ],
   bootstrap: [AppComponent],
   exports: [
   ]
