@@ -27,6 +27,10 @@ import { listToken, MobileListComponent } from './test-service/mobile/mobile-lis
 import { MobileComponent } from './test-service/mobile/mobile.component';
 import { MobileDirective } from './test-service/mobile/mobile.directive';
 import { ChangeComponent } from './change-detection/change/change.component';
+import { AlexComponent } from './test-service/alex/alex.component';
+import { CarolComponent } from './test-service/alex/carol/carol.component';
+import { CathyComponent } from './test-service/alex/cathy/cathy.component';
+import { CraigComponent } from './test-service/alex/craig/craig.component';
 
 const declarations = [
   SizerComponent,
@@ -53,7 +57,11 @@ const declarations = [
   MobileContentComponent,
   MobileListComponent,
   MobileComponent,
-  MobileDirective
+  MobileDirective,
+  AlexComponent,
+  CarolComponent,
+  CathyComponent,
+  CraigComponent
 ];
 
 @NgModule({
