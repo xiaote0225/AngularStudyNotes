@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { concat, from, interval, Observable } from 'rxjs';
+import { concat, from, interval, Observable, Subscriber } from 'rxjs';
 import {throttleTime,scan, map, reduce, tap} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
@@ -22,6 +22,112 @@ export class ExampleComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //Observable
+    //Observable负责从数据源中推送数据,类似Promise
+    // const observable = new Observable(subscriber => {
+    //   //推送3个数据
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    // })
+    // console.log('before subscribe');
+    // observable.subscribe(x => {
+    //   console.log('获得 value ' + x);
+    // });
+    // console.log('subscribe');
+
+    //lazy computations
+    // const foo = new Observable(subscriber => {
+    //   console.log('Hello');
+    //   subscriber.next(42);
+    // });
+    // foo.subscribe(x => {
+    //   console.log('x',x);
+    // });
+
+    //Observable可同步，也可异步推送值
+    // const foo = new Observable(subscriber => {
+    //   console.log('init Observable');
+    //   subscriber.next('666');
+    // });
+
+    // console.log('before');
+    // foo.subscribe(res => {
+    //   console.log('res',res);
+    // });
+    // console.log('after');
+
+    // const foo = new Observable(subscriber => {
+    //   console.log('init Observalbe');
+    //   subscriber.next('001');
+    //   subscriber.next('002');
+    //   subscriber.next('003');
+    //   setTimeout(() => {
+    //     subscriber.next('setTimeout.....');
+    //   },2000)
+    // });
+    // console.log('before...');
+    // foo.subscribe(res => {
+    //   console.log('res',res);
+    // });
+    // console.log('after...');
+
+    //创建Observables
+    //可用new Observable创建，但实际情况更多的是用of,from,interval等操作符创建
+    // const observable = new Observable(function subscribe(subscriber){
+    //   const id = setInterval(() => {
+    //     subscriber.next('hi')
+    //   },1000);
+    // });
+    // observable.subscribe(res => {
+    //   console.log('example res',res);
+    // });
+
+    //手动结束推送
+    // const observable = new Observable(function subscribe(subscriber){
+    //   subscriber.next(1);
+    //   subscriber.next(2);
+    //   subscriber.next(3);
+    //   subscriber.complete();
+    //   subscriber.next(4);
+    // });
+    // observable.subscribe(value => {
+    //   console.log('value',value);
+    // },error => {
+    //   console.log('error',error);
+    // },() => {
+    //   console.log('complete');
+    // });
+
+    //发生错误
+    const observable = new Observable(function subscribe(subscriber){
+      try{
+        subscriber.next(1);
+        subscriber.next(2);
+      }catch(err){
+        subscriber.error(new Error('出事了'));
+      }
+    });
+    // observable.subscribe(value => {
+    //   console.log('value',value);
+    // },error => {
+    //   console.log('error err',error);
+    // },() => {
+    //   console.log('complete');
+    // });
+
+    //Observable.subscribe的完整写法
+    observable.subscribe({
+      next(value){
+        console.log('value',value);
+      },
+      error(error){
+        console.log('error',error);
+      },
+      complete(){
+        console.log('complete');
+      }
+    });
   }
 
   newPromise(){
