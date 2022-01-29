@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { concat, from, interval, Observable, of, Subscriber } from 'rxjs';
+import { concat, empty, from, fromEvent, iif, interval, Observable, of, range, Subscriber, throwError, timer } from 'rxjs';
 import {throttleTime,scan, map, reduce, tap} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
@@ -161,6 +161,90 @@ export class ExampleComponent implements OnInit {
     //     console.log('complete');
     //   }
     // });
+
+    // of
+    // 按顺序发出任意类型和数量的值
+    // const source = of(1,2,3,4,5);
+    // source.subscribe(val => console.log('of ',val));
+
+    // const source = of({name:'Brian'},[1,2,3],function hello(){
+    //   return 'Hello';
+    // });
+    // const subscribe = source.subscribe(val => console.log('of',val));
+
+    // from
+    // 将数组、promise或迭代器转换成observable
+    //转数组
+    // const arraySource = from([1,2,3,4,5]);
+    // const subscribe = arraySource.subscribe(val => console.log('from ',val));
+    //转Promise
+    // const promiseSource = from(new Promise(resolve => resolve('Hello World!')));
+    // const subscribe = promiseSource.subscribe(val => console.log('from ',val));
+    //转Map对象
+    // const map = new Map([[1,'hi']]);
+    // map.set(2,'Bye');
+    // map.set(3,'rxjs');
+    // const mapSource = from(map);
+    // const subscribe = mapSource.subscribe(val => console.log(val));
+    //转字符串
+    // const source = from('Hello World');
+    // source.subscribe(val => console.log(val));
+
+    //empty
+    // const result = empty();
+    // result.subscribe(
+    //   res => console.log(res),
+    //   error => {},
+    //   () => console.log('ok')
+    // );
+
+    //fromEvent
+    // const source = fromEvent(document,'click');
+    // const example = source.pipe(map(event => `Event time: ${event.timeStamp}`));
+    // example.subscribe(val => console.log('fromEvent',val));
+
+    //interval
+    // const source = interval(1000);
+    // const subscribe = source.subscribe(val => console.log('interval ',val));
+
+    //timer
+    // const source = timer(1000);
+    // const subscribe = source.subscribe(val => console.log('timer ',val));
+
+    // const source = timer(1000,2000);
+    // const subscribe = source.subscribe(val => console.log('timer ',val));
+
+    //range
+    // const numbers = range(2,5);
+    // numbers.subscribe(res => console.log('range ',res));
+
+    // const numbers = range(4);
+    // numbers.subscribe(res => console.log('range ',res));
+
+    //iif
+    // const random = Math.random();
+    // console.log('random',random);
+    // const firstOrSecond$ = iif(
+    //   () => random > 0.5,
+    //   of('first'),
+    //   of('second')
+    // );
+    // firstOrSecond$.subscribe(res => {
+    //   console.log('res',res);
+    // });
+
+    // throwError
+    const err$ = throwError(new Error('fail'));
+    err$.subscribe(
+      res => {
+        console.log('res ',res);
+      },
+      error => {
+        console.error(error);
+      },
+      () => console.log('complete')
+    );
+
   }
 
   newPromise(){
@@ -177,17 +261,17 @@ export class ExampleComponent implements OnInit {
     //   console.log('第2个then',res);
     //   return res;
     // });
-    const p = new Promise(resolve => {
-      console.log('initial a promise');
-      resolve(['a','b','c'])
-    }).then(res => {
-      console.log('第1个then',res);
-      return res;
-    }).then(res => {
-      console.log('第2个then',res);
-      return res;
-    }
-    );
+    // const p = new Promise(resolve => {
+    //   console.log('initial a promise');
+    //   resolve(['a','b','c'])
+    // }).then(res => {
+    //   console.log('第1个then',res);
+    //   return res;
+    // }).then(res => {
+    //   console.log('第2个then',res);
+    //   return res;
+    // }
+    // );
   }
 
   newObservable(){
