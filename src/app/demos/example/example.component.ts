@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { concat, from, interval, Observable, Subscriber } from 'rxjs';
+import { concat, from, interval, Observable, of, Subscriber } from 'rxjs';
 import {throttleTime,scan, map, reduce, tap} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
@@ -8,12 +8,29 @@ import { Mobile2Service } from '../components/test-service/mobile/mobile2.servic
 //   console.log('interval=---=',res);
 // });
 
-const observable1 = interval(2000);
-const observable2 = interval(1000);
+// const observable1 = interval(2000);
+// const observable2 = interval(1000);
 
-const subscription = observable1.subscribe(x => console.log('first: ' + x));
-const childSubscription = observable2.subscribe(x => console.log('child' + x));
-subscription.add(childSubscription);
+// const subscription = observable1.subscribe(x => console.log('first: ' + x));
+// const childSubscription = observable2.subscribe(x => console.log('child' + x));
+// subscription.add(childSubscription);
+
+function selfMap(source:Observable<string>,callBack:(item:string) => string){
+  return new Observable(observer => {
+    return source.subscribe(
+      value => {
+        try{
+          observer.next(callBack(value));
+        }catch(e){
+          observer.error(e);
+        }
+      },
+      (err) => { observer.error(err)},
+      () => { observer.complete() }
+    );
+  })
+}
+
 
 @Component({
   selector: 'app-example',
@@ -27,6 +44,15 @@ export class ExampleComponent implements OnInit {
   showFlag = true;
 
   constructor() { }
+
+
+  testSelfMap():void{
+    const people$ = of('001abc','002abc');
+    const hellePeople$ = selfMap(people$, (item:string) => item + ' Hello~');
+    hellePeople$.subscribe(res => {
+      console.log('res',res);
+    });
+  }
 
   ngOnInit(): void {
     //Observable
@@ -168,27 +194,27 @@ export class ExampleComponent implements OnInit {
     // const o = new Observable(subscriber => {
     //   console.log('initial a newObservable'); //不触发
     // });
-    const o = new Observable(subscriber => {
-      console.log('initial a newObservable');
-      subscriber.next(['a','b','c']);
-    }).pipe(
-      map(res => {
-        console.log('第一个map');
-        return res;
-      }),
-      map(res => {
-        console.log('第2个map');
-        return res;
-      })
-    );
-    o.subscribe(res => {
-      console.log('res--------------');
-    })
+    // const o = new Observable(subscriber => {
+    //   console.log('initial a newObservable');
+    //   subscriber.next(['a','b','c']);
+    // }).pipe(
+    //   map(res => {
+    //     console.log('第一个map');
+    //     return res;
+    //   }),
+    //   map(res => {
+    //     console.log('第2个map');
+    //     return res;
+    //   })
+    // );
+    // o.subscribe(res => {
+    //   console.log('res--------------');
+    // })
 
   }
 
   cancelObservable():void{
-    subscription.unsubscribe();
+    // subscription.unsubscribe();
   }
 
   concat(){
