@@ -27,6 +27,6 @@ export interface Hero{
 })
 export class AppComponent{
   constructor(private mobile2Service:Mobile2Service){
-    console.log(this.mobile2Service.getMobile('m2'));
+    // console.log(this.mobile2Service.getMobile('m2'));
   }
 }
