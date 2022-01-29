@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { concat, empty, from, fromEvent, iif, interval, Observable, of, range, Subscriber, throwError, timer } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap} from 'rxjs/operators';
+import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
+import {throttleTime,scan, map, reduce, tap, take, mapTo} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -234,17 +234,78 @@ export class ExampleComponent implements OnInit {
     // });
 
     // throwError
-    const err$ = throwError(new Error('fail'));
-    err$.subscribe(
-      res => {
-        console.log('res ',res);
-      },
-      error => {
-        console.error(error);
-      },
-      () => console.log('complete')
-    );
+    // const err$ = throwError(new Error('fail'));
+    // err$.subscribe(
+    //   res => {
+    //     console.log('res ',res);
+    //   },
+    //   error => {
+    //     console.error(error);
+    //   },
+    //   () => console.log('complete')
+    // );
 
+    // combineLatest
+    //合并多个Observable,并且返回每个Observable的最新值
+    //必须要每个Observable都有发出值，combineLatest才能被订阅
+    // const firstTimer = timer(0,1000);
+    // const secondTimer = timer(500,1000);
+    // const res$ = combineLatest(firstTimer,secondTimer);
+    // res$.subscribe(res => {
+    //   console.log('res',res);
+    // });
+
+    //concat
+    //类似数组的concat,将每个Observable拼接起来，按顺序发出值
+    // const timer$ = interval(1000).pipe(take(4));
+    // const sequence$ = range(1,10);
+    // const result = concat(timer$,sequence$);
+    // result.subscribe(x => console.log(x));
+
+    //forkJoin
+    //类似Promise.all,等每个Observables都完成后，合并它们发出的最后一个值
+    // const observable = forkJoin([
+    //   of(1,2,3,4),
+    //   Promise.resolve(8),
+    //   timer(4000)
+    // ]);
+    // observable.subscribe({
+    //   next:value => console.log(value),
+    //   complete:() => console.log('This is how it ends!')
+    // });
+
+    //merge
+    //将多个Observable合并，与concat的行为不同，merge是把值按发射的顺序，逐个进行融合
+    // const clicks$ = fromEvent(document,'click');
+    // const timer$ = interval(1000);
+    // const clicksOrTimer$ = merge(clicks$,timer$);
+    // clicksOrTimer$.subscribe(res => console.log(res));
+
+    // const timer1 = interval(1000).pipe(take(10),mapTo('a'));
+    // const timer2 = interval(2000).pipe(take(6),mapTo('b'));
+    // const timer3 = interval(3000).pipe(take(10),mapTo('c'));
+    // const merged$ = merge(timer1,timer2,timer3,2);
+    // merged$.subscribe(x => console.log(x));
+
+    //partition
+    //将一个Observable按条件分成两个
+    // const observableValues = of(1,2,3,4,5,6);
+    // const [evens$,odds$] = partition(observableValues,(value,index) => value % 2 === 0);
+    // odds$.subscribe(x => console.log('odd ',x));
+    // evens$.subscribe(x => console.log('evens ',x));
+
+    //race
+    // const obs1 = interval(1000).pipe(mapTo('fast one'));
+    // const obs2 = interval(3000).pipe(mapTo('medium one'));
+    // const obs3 = interval(5000).pipe(mapTo('slow one'));
+
+    // race(obs1,obs2,obs3).subscribe(winner => console.log('res',winner));
+
+    //zip
+    const age$ = of<number>(27,25,29);
+    const name$ = of<string>('Foo','Bar',"Beer");
+    const isDev$ = of<boolean>(true,true,false);
+    zip(age$,name$,isDev$).subscribe(x => console.log(x));
   }
 
   newPromise(){
