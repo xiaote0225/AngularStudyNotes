@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap, take, mapTo} from 'rxjs/operators';
+import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -302,10 +302,45 @@ export class ExampleComponent implements OnInit {
     // race(obs1,obs2,obs3).subscribe(winner => console.log('res',winner));
 
     //zip
-    const age$ = of<number>(27,25,29);
-    const name$ = of<string>('Foo','Bar',"Beer");
-    const isDev$ = of<boolean>(true,true,false);
-    zip(age$,name$,isDev$).subscribe(x => console.log(x));
+    // const age$ = of<number>(27,25,29);
+    // const name$ = of<string>('Foo','Bar',"Beer");
+    // const isDev$ = of<boolean>(true,true,false);
+    // zip(age$,name$,isDev$).subscribe(x => console.log(x));
+
+    //combineAll
+    // const clicks = fromEvent(document,'click');
+    // const higherOrder = clicks.pipe(
+    //   map(ev => interval(2000).pipe(take(3))),
+    //   take(3)
+    // );
+    // const result = higherOrder.pipe(combineAll());
+    // result.subscribe(x => console.log(x));
+
+    //concatAll
+    // const clicks = fromEvent(document,'click');
+    // const higherOrder = clicks.pipe(
+    //   map(ev => interval(1000).pipe(take(4)))
+    // );
+    // const firstOrder = higherOrder.pipe(concatAll());
+    // firstOrder.subscribe(x => console.log(x));
+
+    //mergeAll
+    // const clicks = fromEvent(document,'click');
+    // const higherOrder = clicks.pipe(map((ev) => interval(1000)));
+    // const firstOrder = higherOrder.pipe(mergeAll());
+    // firstOrder.subscribe(x => console.log(x));
+
+    //startWith和endWith
+    // of('from source').pipe(startWith('first','second'),endWith('end')).subscribe(
+    //   x => console.log(x)
+    // );
+
+    //withLatestFrom
+    const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
+    const interval$ = interval(1000);
+    // const result = clicks.pipe(withLatestFrom(interval$));
+    const result = interval$.pipe(withLatestFrom(clicks));
+    result.subscribe(x => console.log(x));
   }
 
   newPromise(){
