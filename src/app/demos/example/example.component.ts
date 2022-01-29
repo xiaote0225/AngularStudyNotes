@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom} from 'rxjs/operators';
+import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -336,11 +336,156 @@ export class ExampleComponent implements OnInit {
     // );
 
     //withLatestFrom
-    const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
-    const interval$ = interval(1000);
-    // const result = clicks.pipe(withLatestFrom(interval$));
-    const result = interval$.pipe(withLatestFrom(clicks));
-    result.subscribe(x => console.log(x));
+    // const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
+    // const interval$ = interval(1000);
+    // // const result = clicks.pipe(withLatestFrom(interval$));
+    // const result = interval$.pipe(withLatestFrom(clicks));
+    // result.subscribe(x => console.log(x));
+
+    //buffer
+    //用数组收集一个流发出的值，直到另一个流发出值，就把当前已收集到的值发出并释放
+    // const clicks = fromEvent(document,'click');
+    // const intervalEvents = interval(1000);
+    // const buffered = intervalEvents.pipe(buffer(clicks));
+    // buffered.subscribe(x => console.log('x',x));
+
+    //bufferCount
+    // const clicks = fromEvent(document,'click');
+    // const buffered = clicks.pipe(bufferCount(3));
+    // buffered.subscribe(x => console.log(x));
+    // const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
+    // const buffered = clicks.pipe(bufferCount(3,3));
+    // buffered.subscribe(x => console.log(x));
+
+    //bufferTime
+    // const clicks = fromEvent(document,'click');
+    // const buffered = clicks.pipe(bufferTime(1000));
+    // buffered.subscribe(x => console.log('x',x));
+
+    //bufferToggle
+    // const sourceInterval = interval(1000);
+    // const startInterval = interval(5000);
+    // const closingInterval = (val:any) => {
+    //   console.log(`${val} 开始缓冲!3秒后关闭`);
+    //   return interval(3000);
+    // }
+    // const bufferToggleInterval = sourceInterval.pipe(
+    //   bufferToggle(
+    //     startInterval,
+    //     closingInterval
+    //   )
+    // );
+    // const subscribe = bufferToggleInterval.subscribe(val => {
+    //   console.log('Emitted Buffer:',val);
+    // });
+
+    //bufferWhen
+    // const oneSecondInterval = interval(1000);
+    // const clicks  = fromEvent(document,'click');
+    // const bufferWhenExample = oneSecondInterval.pipe(bufferWhen(() => clicks));
+    // const subscribe = bufferWhenExample.subscribe(val => {
+    //   console.log('Emitted Buffer: ',val);
+    // });
+
+    //concatMap
+    // const source = of(10,100);
+    // const example = source.pipe(concatMap(val => of(val * 2)));
+    // const subscribe = example.subscribe(val => {
+    //   console.log('Example Promise:',val);
+    // });
+
+    //concatMapTo
+    // const source = of(10,100);
+    // const example = source.pipe(map(() => 'abc'));
+    // const subscribe = example.subscribe(val => {
+    //   console.log('xxx',val);
+    // });
+
+    //exhaust
+    // const clicks = fromEvent(document,'click');
+    // const higherOrder = clicks.pipe(
+    //   map((ev) => interval(1000).pipe(take(5)))
+    // );
+    // const result = higherOrder.pipe(exhaust());
+    // result.subscribe(x => console.log('x',x));
+
+    //exhaustMap
+    // const clicks = fromEvent(document,'click');
+    // const higherOrder = clicks.pipe(
+    //   exhaustMap(ev => interval(1000).pipe(take(5)))
+    // );
+    // higherOrder.subscribe(x => console.log(x));
+
+    //mergeMap
+    // const source = of('Hello');
+    // const myPromise = (val:any) => new Promise(resolve => resolve(`${val} World From Promise!`));
+    // const example = source.pipe(mergeMap(val => myPromise(val)));
+    // const subscribe = example.subscribe(val => console.log(val));
+
+    //mergeMapTo
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(mergeMapTo(interval(1000)));
+    // result.subscribe(x => console.log(x));
+
+    //scan
+    // const click$ = fromEvent(document,'click').pipe(mapTo(1));
+    // const count$ = click$.pipe(
+    //   scan((acc,one) => acc + one,0)
+    // );
+    // count$.subscribe(x => console.log(x));
+
+    //mergeScan
+    // const click$ = fromEvent(document,'click').pipe(mapTo(1));
+    // const count$ = click$.pipe(
+    //   mergeScan((acc,one) => of(acc + one),0)
+    // );
+    // count$.subscribe(x => console.log(x));
+
+    //reduce
+    // const source = of(1,2,3,4);
+    // const example = source.pipe(reduce((acc,val) => acc + val,0));
+    // const subscribe = example.subscribe(val => console.log('Sum:',val));
+
+    //pairwise
+    // const pairs = interval(1000).pipe(pairwise());
+    // pairs.subscribe(x => console.log(x));
+
+    //groupBy
+    // of(
+    //   {id:1,name:'JavaScrip'},
+    //   {id:2,name:'Parcel'},
+    //   {id:1,name:'webpack'},
+    //   {id:2,name:'TypeScript'},
+    //   {id:3,name:'TSLint'}
+    // ).pipe(
+    //   groupBy(p => p.id),
+    //   mergeMap(group => group.pipe(toArray()))
+    // ).subscribe(p => console.log(p));
+
+    //pluck
+    // const clicks = fromEvent(document,'click');
+    // const tagNames = clicks.pipe(pluck('target','tagName'));
+    // tagNames.subscribe(x => console.log(x));
+
+    //switchMap
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(switchMap((ev) => interval(1000)));
+    // result.subscribe(x => console.log(x));
+
+    //switchMapTo
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(switchMapTo(interval(1000)));
+    // result.subscribe(x => console.log(x));
+
+    //map
+    // const source = from([1,2,3,4,5,6]);
+    // const example = source.pipe(map(val => val + 10));
+    // const subscribe = example.subscribe(val => console.log(val));
+
+    //mapTo
+    const source = interval(2000);
+    const example = source.pipe(mapTo('Hello World!'));
+    const subscribe = example.subscribe(val => console.log(val));
   }
 
   newPromise(){
