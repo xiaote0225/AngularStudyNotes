@@ -8,6 +8,13 @@ import { Mobile2Service } from '../components/test-service/mobile/mobile2.servic
 //   console.log('interval=---=',res);
 // });
 
+const observable1 = interval(2000);
+const observable2 = interval(1000);
+
+const subscription = observable1.subscribe(x => console.log('first: ' + x));
+const childSubscription = observable2.subscribe(x => console.log('child' + x));
+subscription.add(childSubscription);
+
 @Component({
   selector: 'app-example',
   templateUrl: './example.component.html',
@@ -100,14 +107,14 @@ export class ExampleComponent implements OnInit {
     // });
 
     //发生错误
-    const observable = new Observable(function subscribe(subscriber){
-      try{
-        subscriber.next(1);
-        subscriber.next(2);
-      }catch(err){
-        subscriber.error(new Error('出事了'));
-      }
-    });
+    // const observable = new Observable(function subscribe(subscriber){
+    //   try{
+    //     subscriber.next(1);
+    //     subscriber.next(2);
+    //   }catch(err){
+    //     subscriber.error(new Error('出事了'));
+    //   }
+    // });
     // observable.subscribe(value => {
     //   console.log('value',value);
     // },error => {
@@ -117,17 +124,17 @@ export class ExampleComponent implements OnInit {
     // });
 
     //Observable.subscribe的完整写法
-    observable.subscribe({
-      next(value){
-        console.log('value',value);
-      },
-      error(error){
-        console.log('error',error);
-      },
-      complete(){
-        console.log('complete');
-      }
-    });
+    // observable.subscribe({
+    //   next(value){
+    //     console.log('value',value);
+    //   },
+    //   error(error){
+    //     console.log('error',error);
+    //   },
+    //   complete(){
+    //     console.log('complete');
+    //   }
+    // });
   }
 
   newPromise(){
@@ -181,7 +188,7 @@ export class ExampleComponent implements OnInit {
   }
 
   cancelObservable():void{
-    // sub.unsubscribe();
+    subscription.unsubscribe();
   }
 
   concat(){
