@@ -1,6 +1,6 @@
 import { Component, OnInit, platformCore, ViewEncapsulation } from '@angular/core';
-import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import { throttleTime, scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay, delayWhen, timeInterval, timestamp, timeout, timeoutWith } from 'rxjs/operators';
+import { combineLatest, concat, EMPTY, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
+import { throttleTime, scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay, delayWhen, timeInterval, timestamp, timeout, timeoutWith, count, max, min, defaultIfEmpty, isEmpty, findIndex, find, every } from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -808,11 +808,71 @@ export class ExampleComponent implements OnInit {
     //   () => console.log('complete')
     // );
 
-    const first$ = interval(2000);
-    const second$ = interval(1000);
-    first$.pipe(timeoutWith(1500,second$)).subscribe(
-      val => console.log('val',val)
-    );
+    // const first$ = interval(2000);
+    // const second$ = interval(1000);
+    // first$.pipe(timeoutWith(1500,second$)).subscribe(
+    //   val => console.log('val',val)
+    // );
+
+    //count
+    // interval(1000).pipe(
+    //   takeUntil(fromEvent(document,'click')),
+    //   count()
+    // ).subscribe(
+    //   x => console.log('count',x)
+    // )
+    // range(1,8).pipe(
+    //   tap(x => console.log(x)),
+    //   count(i => i % 2 === 0)
+    // ).subscribe(
+    //   x => console.log('range',x)
+    // );
+
+    //max
+    // of(12,3,4,5,6666,3343,23).pipe(
+    //   max()
+    // ).subscribe(
+    //   x => console.log('x',x)
+    // );
+
+    // of<Person>(
+    //   {age:4,name:'name001'},
+    //   {age:5,name:'name002'},
+    //   {age:3,name:'name003'}
+    // ).pipe(
+    //   max<Person>((a:Person,b:Person) => a.age < b.age ? -1 : 1)
+    // ).subscribe(
+    //   x => console.log(x)
+    // );
+
+    //min
+    // of(11,2,3,1,4,6).pipe(
+    //   min()
+    // ).subscribe(
+    //   x => console.log(x)
+    // )
+
+    //defaultIfEmpty
+    // EMPTY.pipe(defaultIfEmpty('empty default val')).subscribe(
+    //   x => console.log(x)
+    // );
+
+    //isEmpty
+    // EMPTY.pipe(isEmpty()).subscribe(
+    //   x => console.log(x)
+    // )
+
+    //findIndex
+    // fromEvent(document,'click').pipe(find(ev => (ev.target as HTMLElement).tagName === 'DIV')).subscribe(
+    //   x => console.log(x)
+    // )
+
+    //every
+    of(1,2,3,4,5,6).pipe(
+      every(x => x < 7)
+    ).subscribe(
+      x => console.log(x)
+    )
   }
 
 
