@@ -1,6 +1,6 @@
 import { Component, OnInit, platformCore, ViewEncapsulation } from '@angular/core';
 import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle} from 'rxjs/operators';
+import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -667,9 +667,106 @@ export class ExampleComponent implements OnInit {
     // result.subscribe(x => console.log(x));
 
     //throttleTime
-    const interval$ = interval(500);
-    const result = interval$.pipe(throttleTime(2000));
-    result.subscribe(x => console.log(x));
+    // const interval$ = interval(500);
+    // const result = interval$.pipe(throttleTime(2000));
+    // result.subscribe(x => console.log(x));
+
+    // of(1,2,3,4,5).pipe(
+    //   map(n => {
+    //     if(n === 4){
+    //       throw new Error('four err!');
+    //     }
+    //     return n;
+    //   })
+    // ).subscribe(
+    //   x => console.log(x),
+    //   error => console.error('err',error),
+    //   () => console.log('complete')
+    // );
+
+    //catchError
+    //无视错误，返回一个新的Observable
+    // of(1,2,3,4,5).pipe(
+    //   map(n => {
+    //     if(n === 4){
+    //       throw new Error('four err!');
+    //     }
+    //     return n;
+    //   }),
+    //   catchError(err => of('I','II','III','四','五'))
+    // ).subscribe(
+    //   x => console.log(x),
+    //   error => console.error('err',error),
+    //   () => console.log('complete')
+    // );
+    //重试错误
+    // of(1,2,3,4,5).pipe(
+    //   map( n => {
+    //     if(n === 4){
+    //       throw new Error('four err');
+    //     }
+    //     return n;
+    //   }),
+    //   catchError((err,caught) => caught),
+    //   take(30)
+    // ).subscribe(
+    //   x => console.log(x)
+    // );
+    //抛出一个异常
+    // of(1,2,3,4,5,6).pipe(
+    //   map(n => {
+    //     if(n === 4){
+    //       throw new Error('four err');
+    //     }
+    //     return n;
+    //   }),
+    //   catchError(err => {
+    //     throw new Error('eror in source.Details: '+err);
+    //   })
+    // ).subscribe(
+    //   x => console.log(x),
+    //   err => console.error('err',err),
+    //   () => console.log('complete')
+    // );
+
+    //retry
+    //发生错误后重试指定的次数
+    // const interval$ = interval(1000);
+    // const mergeMap$ = interval$.pipe(
+    //   mergeMap(item => {
+    //     if(item === 4){
+    //       throw new Error('error......');
+    //       // return throwError('Errro!!!!');
+    //     }
+    //     return of(item);
+    //   }),
+    //   retry(2)
+    // );
+    // mergeMap$.subscribe(
+    //   val => console.log(val),
+    //   error => console.error(error),
+    //   () => console.log('complete')
+    // );
+
+    //retryWhen
+    interval(1000).pipe(
+      mergeMap(item => {
+        if(item === 5){
+          throw item;
+        }
+        return of(item);
+      }),
+      retryWhen(errors => {
+        return errors.pipe(
+          tap(val => console.log(`value ${val} 太大了`)),
+          delay(3000)
+        )
+      })
+    ).subscribe(
+      x => console.log(x),
+      error => console.log(error),
+      () => console.log('complete...')
+    )
   }
 
 
