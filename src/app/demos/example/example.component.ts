@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, platformCore, ViewEncapsulation } from '@angular/core';
 import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo} from 'rxjs/operators';
+import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle} from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -29,6 +29,11 @@ function selfMap(source:Observable<string>,callBack:(item:string) => string){
       () => { observer.complete() }
     );
   })
+}
+
+interface Person{
+  age:number,
+  name:string
 }
 
 
@@ -483,10 +488,191 @@ export class ExampleComponent implements OnInit {
     // const subscribe = example.subscribe(val => console.log(val));
 
     //mapTo
-    const source = interval(2000);
-    const example = source.pipe(mapTo('Hello World!'));
-    const subscribe = example.subscribe(val => console.log(val));
+    // const source = interval(2000);
+    // const example = source.pipe(mapTo('Hello World!'));
+    // const subscribe = example.subscribe(val => console.log(val));
+
+    //audit
+    // const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
+    // const result = clicks.pipe(audit(ev => interval(2000)));
+    // result.subscribe(x => console.log('x',x));
+
+    //auditTime
+    // const clicks = fromEvent(document,'click').pipe(pluck('clientX'));
+    // const result = clicks.pipe(auditTime(2000));
+    // result.subscribe(x => console.log('x',x));
+
+    //debounce
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(pluck('clientX'),debounce(() => interval(1000)));
+    // result.subscribe(x => console.log(x));
+
+    //debounceTime
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(debounceTime(1000));
+    // result.subscribe(x => console.log(x));
+
+    //distinct
+    // of(1,1,2,2,2,1,2,3,4,3,2,1).pipe(distinct()).subscribe(
+    //   x => console.log(x)
+    // );
+    // of<Person>(
+    //   {age:4,name:'Foo'},
+    //   {age:7,name:'Bar'},
+    //   {age:5,name:'Foo'}
+    // ).pipe(
+    //   distinct((p:Person) => p.name)
+    // ).subscribe(
+    //   x => console.log(x)
+    // );
+
+    // of(1,1,2,2,2,1,1,2,3,3,4,4).pipe(distinctUntilChanged()).subscribe(
+    //   x => console.log(x)
+    // );
+
+    // of<Person>(
+    //   {age:4,name:'Foo'},
+    //   {age:7,name:'Bar'},
+    //   {age:5,name:'Foo'},
+    //   {age:6,name:'Foo'}
+    // ).pipe(
+    //   distinctUntilChanged((p:Person,q:Person) => p.name === q.name)
+    // ).subscribe(
+    //   x => console.log(x)
+    // );
+
+    // of<Person>(
+    //   {age:4,name:'Foo'},
+    //   {age:7,name:'Bar'},
+    //   {age:5,name:'Foo'},
+    //   {age:6,name:'Foo'}
+    // ).pipe(
+    //   distinctUntilKeyChanged('name')
+    // ).subscribe(
+    //   x => console.log(x)
+    // )
+
+    // of<Person>(
+    //   {age:4,name:'Foo1'},
+    //   {age:7,name:'Bar'},
+    //   {age:5,name:'Foo2'},
+    //   {age:5,name:'F1o2'},
+    //   {age:6,name:'Foo3'}
+    // ).pipe(
+    //   distinctUntilKeyChanged('name',(x:string,y:string) => x.substring(0,3) === y.substring(0,3))
+    // ).subscribe(
+    //   x => console.log(x)
+    // );
+
+    //elementAt
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(elementAt(2));
+    // result.subscribe(x => console.log(x));
+
+    //ignoreElements
+    // of('you','talking','to','me').pipe(ignoreElements()).subscribe(
+    //   word => console.log(word),
+    //   err => console.log('error:',err),
+    //   () => console.log('the end')
+    // );
+
+    //filter
+    // const clicks = fromEvent(document,'click');
+    // const clicksOnDivs = clicks.pipe(tap(ev => console.log('ev',ev)),filter(ev => (ev.target as HTMLElement).tagName === 'DIV'));
+    // clicksOnDivs.subscribe(x => console.log(x));
+
+    //first
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(first());
+    // result.subscribe(x => console.log(x));
+
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(first(ev => (ev.target as HTMLElement).tagName === 'DIV'));
+    // result.subscribe(x => console.log(x));
+
+    //last
+    // of('you','talking','to','me').pipe(last()).subscribe(
+    //   res => console.log(res)
+    // );
+
+    //sample
+    // const seconds = interval(1000);
+    // const clicks = fromEvent(document,'click');
+    // const result = seconds.pipe(sample(clicks));
+    // result.subscribe(x => console.log(x));
+
+    //sampleTime
+    // const clicks = fromEvent(document,'click');
+    // const result = clicks.pipe(sampleTime(3000));
+    // result.subscribe(x => console.log(x));
+
+    //single
+    // const numbers = range(1,5).pipe(single());
+    // numbers.subscribe(x => console.log('never get called'),e => console.log('error'));
+
+    // const numbers = range(1).pipe(single());
+    // numbers.subscribe(x => console.log('get result',x),e => console.log('error'));
+
+    // const numbers = range(1,5).pipe(single(item => item === 3));
+    // numbers.subscribe(x => console.log('get result',x),e => console.log('error'));
+
+    // const number2 = range(1,5).pipe(single(item => item > 3));
+    // number2.subscribe(x => console.log('get result',x),e => console.log('error'));
+
+    //skip
+    // const source = interval(1000);
+    // const example = source.pipe(skip(5));
+    // const subscribe = example.subscribe(x => console.log(x));
+
+    //skipLat
+    // const many = range(1,5);
+    // const skipLastTwo = many.pipe(skipLast(2));
+    // skipLastTwo.subscribe(x => console.log(x));
+
+    //skipUntil
+    // const intervalObservable = interval(1000);
+    // const click = fromEvent(document,'click');
+    // const emitAfterClick = intervalObservable.pipe(skipUntil(click));
+    // const subscribe = emitAfterClick.subscribe(value => console.log(value));
+
+    //skipWhile
+    // const source = interval(1000);
+    // const example = source.pipe(skipWhile(val => val < 5));
+    // const subscribe = example.subscribe(x => console.log(x));
+
+    //take
+    // const intervalCount = interval(1000);
+    // const takFive = intervalCount.pipe(take(5));
+    // takFive.subscribe(x => console.log(x));
+
+    //takeLast
+    // const many = range(1,100);
+    // const lastThree = many.pipe(takeLast(3));
+    // lastThree.subscribe(x => console.log(x));
+
+    //takeUntil
+    // const source = interval(1000);
+    // const clicks = fromEvent(document,'click');
+    // const result = source.pipe(takeUntil(clicks));
+    // result.subscribe(x => console.log(x));
+
+    //takeWhile
+    // const source = range(1,8);
+    // const example = source.pipe(takeWhile(val => val < 4));
+    // const subscribe = example.subscribe(x => console.log(x));
+
+    //throttle
+    // const interval$ = interval(500);
+    // const result = interval$.pipe(throttle(ev => interval(2000),{leading:true,trailing:false}));
+    // result.subscribe(x => console.log(x));
+
+    //throttleTime
+    const interval$ = interval(500);
+    const result = interval$.pipe(throttleTime(2000));
+    result.subscribe(x => console.log(x));
   }
+
+
 
   newPromise(){
     // const p = new Promise(resolve => {
