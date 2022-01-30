@@ -1,6 +1,6 @@
 import { Component, OnInit, platformCore, ViewEncapsulation } from '@angular/core';
 import { combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subscriber, throwError, timer, zip } from 'rxjs';
-import {throttleTime,scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay} from 'rxjs/operators';
+import { throttleTime, scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay, delayWhen, timeInterval, timestamp, timeout, timeoutWith } from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
 
@@ -15,25 +15,25 @@ import { Mobile2Service } from '../components/test-service/mobile/mobile2.servic
 // const childSubscription = observable2.subscribe(x => console.log('child' + x));
 // subscription.add(childSubscription);
 
-function selfMap(source:Observable<string>,callBack:(item:string) => string){
+function selfMap(source: Observable<string>, callBack: (item: string) => string) {
   return new Observable(observer => {
     return source.subscribe(
       value => {
-        try{
+        try {
           observer.next(callBack(value));
-        }catch(e){
+        } catch (e) {
           observer.error(e);
         }
       },
-      (err) => { observer.error(err)},
+      (err) => { observer.error(err) },
       () => { observer.complete() }
     );
   })
 }
 
-interface Person{
-  age:number,
-  name:string
+interface Person {
+  age: number,
+  name: string
 }
 
 
@@ -41,7 +41,7 @@ interface Person{
   selector: 'app-example',
   templateUrl: './example.component.html',
   styleUrls: ['./example.component.scss'],
-  encapsulation:ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
   // providers:[{provide:listToken,useValue:'8888'}]
 })
 export class ExampleComponent implements OnInit {
@@ -51,11 +51,11 @@ export class ExampleComponent implements OnInit {
   constructor() { }
 
 
-  testSelfMap():void{
-    const people$ = of('001abc','002abc');
-    const hellePeople$ = selfMap(people$, (item:string) => item + ' Hello~');
+  testSelfMap(): void {
+    const people$ = of('001abc', '002abc');
+    const hellePeople$ = selfMap(people$, (item: string) => item + ' Hello~');
     hellePeople$.subscribe(res => {
-      console.log('res',res);
+      console.log('res', res);
     });
   }
 
@@ -749,29 +749,75 @@ export class ExampleComponent implements OnInit {
     // );
 
     //retryWhen
-    interval(1000).pipe(
-      mergeMap(item => {
-        if(item === 5){
-          throw item;
-        }
-        return of(item);
-      }),
-      retryWhen(errors => {
-        return errors.pipe(
-          tap(val => console.log(`value ${val} 太大了`)),
-          delay(3000)
-        )
-      })
-    ).subscribe(
-      x => console.log(x),
-      error => console.log(error),
-      () => console.log('complete...')
-    )
+    // interval(1000).pipe(
+    //   mergeMap(item => {
+    //     if(item === 5){
+    //       throw item;
+    //     }
+    //     return of(item);
+    //   }),
+    //   retryWhen(errors => {
+    //     return errors.pipe(
+    //       tap(val => console.log(`value ${val} 太大了`)),
+    //       delay(3000)
+    //     )
+    //   })
+    // ).subscribe(
+    //   x => console.log(x),
+    //   error => console.log(error),
+    //   () => console.log('complete...')
+    // )
+
+    //tap
+    // const click$ = fromEvent(document,'click');
+    // const result$ = click$.pipe(
+    //   map(ev => (ev as any).clientX),
+    //   tap(ev => console.log('tap',ev))
+    // );
+    // result$.subscribe(x => console.log(x));
+
+    //delay
+    // const click$ = fromEvent(document,'click');
+    // const result$ = click$.pipe(
+    //   delay(3000)
+    // );
+    // result$.subscribe(x => console.log(x));
+
+    //delayWhen
+    // fromEvent(document,'click').pipe(
+    //   // delayWhen(event => interval(2000))
+    //   delayWhen(event => interval(Math.random() * 5000))
+    // ).subscribe(
+    //   x => console.log(x)
+    // )
+
+    // interval(1000).pipe(timeInterval()).subscribe(
+    //   x => console.log(x),
+    //   err => console.log(err),
+    //   () => console.log('complete')
+    // )
+    // interval(1000).pipe(timestamp()).subscribe(
+    //   x => console.log(x),
+    //   err => console.log(err),
+    //   () => console.log('complete')
+    // )
+
+    // interval(1000).pipe(tap(x => console.log('tap x', x)), timeout(100)).subscribe(
+    //   x => console.log(x),
+    //   err => console.error(err),
+    //   () => console.log('complete')
+    // );
+
+    const first$ = interval(2000);
+    const second$ = interval(1000);
+    first$.pipe(timeoutWith(1500,second$)).subscribe(
+      val => console.log('val',val)
+    );
   }
 
 
 
-  newPromise(){
+  newPromise() {
     // const p = new Promise(resolve => {
     //   console.log('initial a promise');//立即触发
     // });
@@ -798,7 +844,7 @@ export class ExampleComponent implements OnInit {
     // );
   }
 
-  newObservable(){
+  newObservable() {
     // const o = new Observable(subscriber => {
     //   console.log('initial a newObservable'); //不触发
     // });
@@ -821,20 +867,20 @@ export class ExampleComponent implements OnInit {
 
   }
 
-  cancelObservable():void{
+  cancelObservable(): void {
     // subscription.unsubscribe();
   }
 
-  concat(){
-    const arr$ = from([11,22,33]);
-    const arr2$ = from([1,2,3]);
-    concat(arr$,arr2$).pipe(
-      reduce((s,v) => s + v,0),
+  concat() {
+    const arr$ = from([11, 22, 33]);
+    const arr2$ = from([1, 2, 3]);
+    concat(arr$, arr2$).pipe(
+      reduce((s, v) => s + v, 0),
       tap(item => {
-        console.log('tap',item);
+        console.log('tap', item);
       })
     ).subscribe(res => {
-      console.log('concat',res);
+      console.log('concat', res);
     });
   }
 }
