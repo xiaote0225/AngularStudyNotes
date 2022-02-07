@@ -1,5 +1,5 @@
 import { Component, OnInit, platformCore, ViewEncapsulation } from '@angular/core';
-import { combineLatest, concat, EMPTY, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, Subject, Subscriber, throwError, timer, zip } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, combineLatest, concat, EMPTY, empty, forkJoin, from, fromEvent, iif, interval, merge, Observable, of, partition, race, range, ReplaySubject, Subject, Subscriber, throwError, timer, zip } from 'rxjs';
 import { throttleTime, scan, map, reduce, tap, take, mapTo, combineAll, concatAll, mergeAll, startWith, endWith, pluck, withLatestFrom, buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, concatMap, concatMapTo, exhaust, exhaustMap, mergeMap, mergeMapTo, mergeScan, pairwise, groupBy, toArray, switchMap, switchMapTo, audit, auditTime, debounce, debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt, ignoreElements, filter, first, last, sample, sampleTime, single, skip, skipLast, skipUntil, skipWhile, takeLast, takeUntil, takeWhile, throttle, catchError, retry, retryWhen, delay, delayWhen, timeInterval, timestamp, timeout, timeoutWith, count, max, min, defaultIfEmpty, isEmpty, findIndex, find, every } from 'rxjs/operators';
 import { listToken } from '../components/test-service/mobile/mobile-list/mobile-list.component';
 import { Mobile2Service } from '../components/test-service/mobile/mobile2.service';
@@ -50,37 +50,82 @@ export class ExampleComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
-    // 单播
-    // const source$ = range(5);
-    // source$.subscribe(val => console.log('A: ' + val));
-    // source$.subscribe(val => console.log('B: ' + val));
+    // BehaviorSubject
+    // const subject = new Subject();
+    // const subject = new BehaviorSubject(0);
+    // const observerA = {
+    //   next: (value:any) => console.log('A next: ' + value),
+    //   error: (error:any) => console.log('A error: ' + error),
+    //   complete: () => console.log('A complete!')
+    // };
+    // const observerB = {
+    //   next: (value:any) => console.log('B next: ' + value),
+    //   error: (error:any) => console.log('B error: ' + error),
+    //   complete: () => console.log('B complete')
+    // };
 
-    // 多播
-    // const source$ = range(5);
-    // const subject$ = new Subject();
-    // subject$.subscribe(val => console.log('A: ' + val));
-    // subject$.subscribe(val => console.log('B: ' + val));
-    // source$.subscribe(subject$);
+    // subject.subscribe(observerA);
+    // subject.next(1);
+    // subject.next(2);
+    // subject.next(3);
+    // // subject.subscribe(observerB);
+    // setTimeout(() => {
+    //   subject.subscribe(observerB);
+    // },3000);
 
-    // const subject = new Subject<number>();
+    // const subject = new BehaviorSubject(0);
     // subject.subscribe({
     //   next: (v) => console.log(`observerA: ${v}`)
     // });
+    // subject.next(1);
+    // subject.next(2);
     // subject.subscribe({
     //   next: (v) => console.log(`observerB: ${v}`)
     // });
+    // subject.next(3);
+
+    //ReplaySubject
+    // const subject = new ReplaySubject(3);
+    // subject.subscribe({
+    //   next: (v) => console.log(`observerA: ${v}`)
+    // });
     // subject.next(1);
     // subject.next(2);
+    // subject.next(3);
+    // subject.next(4);
+    // subject.subscribe({
+    //   next: (v) => console.log(`observerB: ${v}`)
+    // });
+    // subject.next(5);
 
-    const observable = from([1,2,3]);
-    const subject = new Subject<number>();
+    // const subject = new ReplaySubject(3,5000);
+    // subject.subscribe({
+    //   next: (v) => console.log(`observerA: ${v}`)
+    // });
+    // range(5).subscribe(value => subject.next(value));
+    // // subject.subscribe({
+    // //   next:(v) => console.log(`observerC: ${v}`)
+    // // });
+    // setTimeout(() => {
+    //   subject.subscribe({
+    //     next:(v) => console.log(`observerB: ${v}`)
+    //   });
+    // },6000);
+
+    //AsyncSubject
+    const subject = new AsyncSubject();
     subject.subscribe({
       next: (v) => console.log(`observerA: ${v}`)
     });
+    subject.next(1);
+    subject.next(2);
+    subject.next(3);
+    subject.next(4);
     subject.subscribe({
       next: (v) => console.log(`observerB: ${v}`)
     });
-    observable.subscribe(subject);
+    subject.next(5);
+    subject.complete();
 
   }
 
