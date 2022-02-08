@@ -1,4 +1,7 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Crisis } from '../crisis';
+import { CrisisService } from '../crisis.service';
 
 @Component({
   selector: 'app-crisis-list',
@@ -8,9 +11,17 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class CrisisListComponent implements OnInit {
 
-  constructor() { }
+  crises$:Observable<Crisis[]>;
+  selectedId:number;
+
+  constructor(private crisisService:CrisisService) { }
 
   ngOnInit(): void {
+    this.crises$ = this.crisisService.getCrises();
+  }
+
+  onSelect(id:number){
+    this.selectedId = id;
   }
 
 }
