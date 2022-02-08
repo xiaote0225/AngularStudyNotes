@@ -18,28 +18,31 @@ import { CrisisListComponent } from './router-study/crisis-center/crisis-list/cr
 import { HeroListComponent } from './router-study/heroes/hero-list/hero-list.component';
 import { NotFoundComponent } from './router-study/not-found/not-found.component';
 import { Routes } from '@angular/router';
+import { HeroesModule } from './router-study/heroes/heroes.module';
+import { CrisisCenterModule } from './router-study/crisis-center/crisis-center/crisis-center.module';
 
-const routes:Routes =[
-  {path:'crisis-center',component:CrisisListComponent},
-  {path:'heroes',component:HeroListComponent},
-  {path:'',redirectTo:'/heroes',pathMatch:'full'},
-  {path:'**',component:NotFoundComponent}
-];
+// const routes:Routes =[
+//   {path:'crisis-center',component:CrisisListComponent},
+//   {path:'heroes',component:HeroListComponent},
+//   {path:'',redirectTo:'/heroes',pathMatch:'full'},
+//   {path:'**',component:NotFoundComponent}
+// ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    CrisisListComponent,
-    HeroListComponent,
+    // CrisisListComponent,
+    // HeroListComponent,
     NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
+    // RouterModule.forRoot(routes),
     DemoModule,
     PagesModule,
-
+    HeroesModule,
+    CrisisCenterModule,
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
