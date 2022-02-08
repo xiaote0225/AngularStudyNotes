@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { listToken } from './demos/components/test-service/mobile/mobile-list/mobile-list.component';
-import { Mobile2Service } from './demos/components/test-service/mobile/mobile2.service';
+import { Router } from '@angular/router';
 export interface Hero{
   name:string;
   id:number|string;
@@ -26,7 +25,17 @@ export interface Hero{
   // `]
 })
 export class AppComponent{
-  constructor(private mobile2Service:Mobile2Service){
-    // console.log(this.mobile2Service.getMobile('m2'));
+  constructor(private router:Router){
+    console.log('------',this.router.onSameUrlNavigation);
+  }
+
+  toCrisisCenter(){
+    // this.router.navigateByUrl('/crisis-center');
+    this.router.navigate(['/crisis-center']);
+  }
+
+  toHeroes(){
+    // this.router.navigateByUrl('/heroes');
+    this.router.navigate(['/heroes']);
   }
 }
