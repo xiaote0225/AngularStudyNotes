@@ -1,3 +1,18 @@
 <div class="hero-detail">
-  <h2>英雄详情</h2>
+  <div *ngIf="hero$ | async as hero">
+    <h2>英雄详情</h2>
+    <h3>{{$any(hero).name}}</h3>
+    <div>
+      <label>Id:</label>
+      {{$any(hero).id}}
+    </div>
+    <div>
+      <label>Name:</label>
+      <input [(ngModel)]="$any(hero).name" placeholder="name">
+    </div>
+    <p>
+      <button (click)="back($any(hero).id)" class="btn btn-secondary">Back to Heroes</button>
+      <button [routerLink]="['/heroes',{id:$any(hero).id}]" class="btn btn-secondary">Back to Heroes</button>
+    </p>
+  </div>
 </div>

@@ -15,7 +15,7 @@ export class HeroService {
     return of(HEROES);
   }
 
-  getHero(id:number|string){
+  getHero(id:number|string):Observable<Hero | undefined>{
     return this.getHeroes().pipe(
       map((heroes:Hero[]) => heroes.find(hero => hero.id === +id))
     );
