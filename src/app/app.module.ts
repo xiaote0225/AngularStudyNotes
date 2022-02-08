@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 // import { LoggerService } from 'src/app/services/logger.service';
 import { HeroService } from 'src/app/services/hero.service';
 import { NgModule } from '@angular/core';
@@ -13,16 +14,32 @@ import { APP_CONFIG } from './configs/types';
 import { UserService } from './services/user.service';
 import { UserLoggerService } from './services/user-logger.service';
 import { listToken } from './demos/components/test-service/mobile/mobile-list/mobile-list.component';
+import { CrisisListComponent } from './router-study/crisis-center/crisis-list/crisis-list.component';
+import { HeroListComponent } from './router-study/heroes/hero-list/hero-list.component';
+import { NotFoundComponent } from './router-study/not-found/not-found.component';
+import { Routes } from '@angular/router';
+
+const routes:Routes =[
+  {path:'crisis-center',component:CrisisListComponent},
+  {path:'heroes',component:HeroListComponent},
+  {path:'',redirectTo:'/heroes',pathMatch:'full'},
+  {path:'**',component:NotFoundComponent}
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CrisisListComponent,
+    HeroListComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // AppRoutingModule,
+    RouterModule.forRoot(routes),
     DemoModule,
-    PagesModule
+    PagesModule,
+
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
