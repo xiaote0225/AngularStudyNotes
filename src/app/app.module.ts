@@ -20,6 +20,8 @@ import { NotFoundComponent } from './router-study/not-found/not-found.component'
 import { Routes } from '@angular/router';
 import { HeroesModule } from './router-study/heroes/heroes.module';
 import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.module';
+import { ComposeMessageComponent } from './router-study/compose-message/compose-message.component';
+import { FormsModule } from '@angular/forms';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -33,7 +35,8 @@ import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.m
     AppComponent,
     // CrisisListComponent,
     // HeroListComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ComposeMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.m
     PagesModule,
     HeroesModule,
     CrisisCenterModule,
+    FormsModule
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
