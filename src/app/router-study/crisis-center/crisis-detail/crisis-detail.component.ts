@@ -30,11 +30,19 @@ export class CrisisDetailComponent implements OnInit {
     // this.crisis$ = this.route.paramMap.pipe(switchMap(params => {
     //   return this.crisisServe.getCrisis(params.get('id')!);
     // }));
-    this.route.paramMap.pipe(switchMap(params => {
-      return this.crisisServe.getCrisis(params.get('id')!);
-    })).subscribe(crisis => {
-      this.crisis = crisis!;
-      this.editName = crisis?.name!;
+
+    // this.route.paramMap.pipe(switchMap(params => {
+    //   return this.crisisServe.getCrisis(params.get('id')!);
+    // })).subscribe(crisis => {
+    //   this.crisis = crisis!;
+    //   this.editName = crisis?.name!;
+    //   this.cdr.markForCheck();
+    // });
+    console.log('crisis detail this.route',this.route);
+    this.route.data.subscribe((data) => {
+      console.log('data',data);
+      this.crisis = data.crisis;
+      this.editName = data.crisis.name;
       this.cdr.markForCheck();
     });
   }
