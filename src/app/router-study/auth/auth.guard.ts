@@ -32,7 +32,11 @@ export class AuthGuard implements CanActivate,CanActivateChild {
     console.log('auth guard checkLogin',url);
 
     // Redirect to the login page
-    return this.router.parseUrl('/login');
+    // return this.router.parseUrl('/login');
+    return this.router.createUrlTree(['/login'],{
+      queryParams:{session_id:1234567,name:'张三'},
+      fragment:'anchor'
+    });
 
   }
 

@@ -1,6 +1,8 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,11 @@ export class LoginComponent implements OnInit {
       this.setMessage();
       if(this.authService.isLoggedIn){
         const redirectUrl = this.authService.redirectUrl;
-        this.router.navigate([redirectUrl]);
+        // this.router.navigate([redirectUrl]);
+        this.router.navigate([redirectUrl],{
+          queryParamsHandling:'preserve',
+          preserveFragment:true
+        });
       }
     });
   }
