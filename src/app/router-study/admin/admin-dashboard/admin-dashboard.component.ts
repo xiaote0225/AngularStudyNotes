@@ -1,3 +1,4 @@
+import { SelectivePreloadingStrategyService } from './../../../services/selective-preloading-strategy.service';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,8 +14,10 @@ export class AdminDashboardComponent implements OnInit {
 
   sessionId: Observable<string>;
   token: Observable<string>;
-
-  constructor(private route: ActivatedRoute) { }
+  modules: string[] = [];
+  constructor(private route: ActivatedRoute,preloadStrategy:SelectivePreloadingStrategyService) {
+    this.modules = preloadStrategy.preloadedModules;
+  }
 
   ngOnInit(): void {
     this.sessionId = this.route.queryParamMap.pipe(map(params => params.get('sesion_id') || 'None'));

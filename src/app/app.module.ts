@@ -19,7 +19,7 @@ import { HeroListComponent } from './router-study/heroes/hero-list/hero-list.com
 import { NotFoundComponent } from './router-study/not-found/not-found.component';
 import { Routes } from '@angular/router';
 import { HeroesModule } from './router-study/heroes/heroes.module';
-import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.module';
+// import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.module';
 import { ComposeMessageComponent } from './router-study/compose-message/compose-message.component';
 import { FormsModule } from '@angular/forms';
 // import { AdminModule } from './router-study/admin/admin.module';
@@ -47,7 +47,7 @@ import { AuthModule } from './router-study/auth/auth.module';
     DemoModule,
     PagesModule,
     HeroesModule,
-    CrisisCenterModule,
+    // CrisisCenterModule,
     FormsModule,
     // AdminModule,
     AuthModule
