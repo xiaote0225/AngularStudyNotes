@@ -1,3 +1,4 @@
+import { AuthGuard } from './router-study/auth/auth.guard';
 import { NotFoundComponent } from './router-study/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,8 +13,13 @@ const namedRoutes = [
 ]
 
 const routes: Routes = [
+  {
+    path:'admin',
+    loadChildren: () => import('./router-study/admin/admin.module').then(m => m.AdminModule),
+    canLoad:[AuthGuard]
+  },
   {path:'',redirectTo:'/heroes',pathMatch:'full'},
-  // {path:'**',component:NotFoundComponent}
+  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
