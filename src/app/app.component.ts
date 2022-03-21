@@ -38,4 +38,11 @@ export class AppComponent{
     // this.router.navigateByUrl('/heroes');
     this.router.navigate(['/heroes']);
   }
+
+  alertResult(...args:number[]){
+    import('./number').then(({default:d,add}) => {
+      console.log('d',d);
+      alert(add(args));
+    });
+  }
 }
