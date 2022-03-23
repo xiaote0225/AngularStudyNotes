@@ -24,6 +24,7 @@ import { ComposeMessageComponent } from './router-study/compose-message/compose-
 import { FormsModule } from '@angular/forms';
 // import { AdminModule } from './router-study/admin/admin.module';
 import { AuthModule } from './router-study/auth/auth.module';
+import { LoginModule } from './pages/login/login.module';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -50,7 +51,8 @@ import { AuthModule } from './router-study/auth/auth.module';
     // CrisisCenterModule,
     FormsModule,
     // AdminModule,
-    AuthModule
+    AuthModule,
+    LoginModule
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}

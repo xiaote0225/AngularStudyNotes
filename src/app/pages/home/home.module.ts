@@ -1,3 +1,5 @@
+import { UpdateHeroComponent } from './update-hero/update-hero.component';
+import { AddHeroComponent } from './add-hero/add-hero.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

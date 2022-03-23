@@ -25,8 +25,9 @@ const routes: Routes = [
   //   loadChildren: () => import('./router-study/crisis-center/crisis-center.module').then(m => m.CrisisCenterModule),
   //   data:{preload:true}
   // },
+  {path:'login',loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
   {path:'',redirectTo:'/home/heroes',pathMatch:'full'},
-  {path:'**',redirectTo:'/home/heroes'}
+  // {path:'**',redirectTo:'/home/heroes'}
   // {path:'**',component:NotFoundComponent}
 ];
 
