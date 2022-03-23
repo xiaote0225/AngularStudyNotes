@@ -4,24 +4,28 @@ import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   selector: 'app-heros',
-  templateUrl: './heros.component.html',
-  styleUrls: ['./heros.component.scss'],
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers:[HeroService]
+  providers:[HeroService]
 })
-export class HerosComponent implements OnInit {
+export class HeroesComponent implements OnInit {
   searchParams: HeroArg = {
     name: '',
     job: '',
     sort: 'desc'
   };
   showSpin = false;
-  heros:Hero[];
+  heroes:Hero[];
   constructor(readonly heroService:HeroService) {
-    this.heros = this.heroService.getHeros();
+    this.heroes = this.heroService.getHeros();
   }
 
   ngOnInit(): void {
+  }
+
+  search(){
+    console.log(this.searchParams);
   }
 
 }

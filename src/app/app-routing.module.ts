@@ -14,28 +14,30 @@ const namedRoutes = [
 ]
 
 const routes: Routes = [
-  {
-    path:'admin',
-    loadChildren: () => import('./router-study/admin/admin.module').then(m => m.AdminModule),
-    canLoad:[AuthGuard]
-    // data:{preload:true}
-  },
-  {
-    path:'crisis-center',
-    loadChildren: () => import('./router-study/crisis-center/crisis-center.module').then(m => m.CrisisCenterModule),
-    data:{preload:true}
-  },
-  {path:'',redirectTo:'/heroes',pathMatch:'full'},
+  // {
+  //   path:'admin',
+  //   loadChildren: () => import('./router-study/admin/admin.module').then(m => m.AdminModule),
+  //   canLoad:[AuthGuard]
+  //   // data:{preload:true}
+  // },
+  // {
+  //   path:'crisis-center',
+  //   loadChildren: () => import('./router-study/crisis-center/crisis-center.module').then(m => m.CrisisCenterModule),
+  //   data:{preload:true}
+  // },
+  {path:'',redirectTo:'/home/heroes',pathMatch:'full'},
+  {path:'**',redirectTo:'/home/heroes'}
   // {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes.concat(namedRoutes),{
-    // enableTracing:true
-    // onSameUrlNavigation:'reload',
-    useHash: true,
-    preloadingStrategy:SelectivePreloadingStrategyService
-  })],
+  // imports: [RouterModule.forRoot(routes.concat(namedRoutes),{
+  //   // enableTracing:true
+  //   // onSameUrlNavigation:'reload',
+  //   useHash: true,
+  //   preloadingStrategy:SelectivePreloadingStrategyService
+  // })],
+  imports:[RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

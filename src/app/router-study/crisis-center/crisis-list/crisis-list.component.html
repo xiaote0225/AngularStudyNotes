@@ -5,4 +5,4 @@
     <li *ngFor="let crisis of crises$ | async" class="list-group-item" [class.active]="selectedId === crisis.id" (click)="onSelect(crisis.id)">{{crisis.name}}</li>
   </ul>
 </div>
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
