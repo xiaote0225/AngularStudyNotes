@@ -33,7 +33,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes.concat(namedRoutes),{
     // enableTracing:true
     // onSameUrlNavigation:'reload',
-    // useHash: true
+    useHash: true,
     preloadingStrategy:SelectivePreloadingStrategyService
   })],
   exports: [RouterModule]
