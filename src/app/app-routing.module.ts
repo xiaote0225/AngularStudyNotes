@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path:'admin',
     loadChildren: () => import('./router-study/admin/admin.module').then(m => m.AdminModule),
-    // canLoad:[AuthGuard]
-    data:{preload:true}
+    canLoad:[AuthGuard]
+    // data:{preload:true}
   },
   {
     path:'crisis-center',

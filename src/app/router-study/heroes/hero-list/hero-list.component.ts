@@ -1,6 +1,7 @@
+import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
@@ -14,7 +15,20 @@ export class HeroListComponent implements OnInit {
 
   heroes$:Observable<Hero[]>;
   selectedId:number;
-  constructor(private heroServe:HeroService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private heroServe:HeroService,private router:Router,private route:ActivatedRoute) {
+    this.router.events
+      .pipe(filter(events => events instanceof NavigationStart))
+      .subscribe((event:any) => {
+        console.log('start event',event);
+        console.log(this.router.parseUrl(event.url));
+      });
+    this.router.events
+      .pipe(filter(events => events instanceof NavigationEnd))
+      .subscribe((event:any) => {
+        console.log('end event',event);
+        console.log(this.router.parseUrl(event.url));
+      });
+  }
 
 
 
