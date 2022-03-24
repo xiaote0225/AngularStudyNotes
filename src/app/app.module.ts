@@ -21,10 +21,12 @@ import { Routes } from '@angular/router';
 import { HeroesModule } from './router-study/heroes/heroes.module';
 // import { CrisisCenterModule } from './router-study/crisis-center/crisis-center.module';
 import { ComposeMessageComponent } from './router-study/compose-message/compose-message.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { AdminModule } from './router-study/admin/admin.module';
 import { AuthModule } from './router-study/auth/auth.module';
 import { LoginModule } from './pages/login/login.module';
+import { NameEditorComponent } from './form-study/name-editor/name-editor.component';
+import { ProfileEditorComponent } from './form-study/profile-editor/profile-editor.component';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -39,7 +41,9 @@ import { LoginModule } from './pages/login/login.module';
     // CrisisListComponent,
     // HeroListComponent,
     NotFoundComponent,
-    ComposeMessageComponent
+    ComposeMessageComponent,
+    NameEditorComponent,
+    ProfileEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ import { LoginModule } from './pages/login/login.module';
     FormsModule,
     // AdminModule,
     AuthModule,
-    LoginModule
+    LoginModule,
+    ReactiveFormsModule
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
