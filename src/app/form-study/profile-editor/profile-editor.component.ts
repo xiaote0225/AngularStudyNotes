@@ -34,7 +34,7 @@ class Profile{
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileEditorComponent implements OnInit {
-  model = new Profile('a','v','','','');
+  model = new Profile('','','','','');
   constructor(private hasMobileServe:HasMobileService) { }
 
   ngOnInit(): void {
@@ -45,7 +45,11 @@ export class ProfileEditorComponent implements OnInit {
   }
 
   onReset(f:NgForm){
-    f.reset({firstName:'aaa',lastName:'bbb',password:'ccc'});
+    f.reset();
+  }
+
+  getError(f:NgForm){
+    console.log(f.form.get('mobile')?.errors);
   }
 
 }

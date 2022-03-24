@@ -27,6 +27,9 @@ import { AuthModule } from './router-study/auth/auth.module';
 import { LoginModule } from './pages/login/login.module';
 import { NameEditorComponent } from './form-study/响应型/name-editor/name-editor.component';
 import { ProfileEditorComponent } from './form-study/profile-editor/profile-editor.component';
+import { EqualValidatorDirective } from './form-study/equal-validator.directive';
+import { ForbiddenValidatorDirective } from './form-study/forbidden-validator.directive';
+import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.directive';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -44,6 +47,9 @@ import { ProfileEditorComponent } from './form-study/profile-editor/profile-edit
     ComposeMessageComponent,
     NameEditorComponent,
     ProfileEditorComponent,
+    EqualValidatorDirective,
+    ForbiddenValidatorDirective,
+    HasMobileValidatorDirective,
   ],
   imports: [
     BrowserModule,
