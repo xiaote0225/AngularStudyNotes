@@ -31,6 +31,7 @@ import { ProfileEditorComponent } from './form-study/profile-editor/profile-edit
 import { ForbiddenValidatorDirective } from './form-study/forbidden-validator.directive';
 import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.directive';
 import { EqualValidatorDirective } from './form-study/equal-validator.directive';
+import interceptors from './services/interceptors';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -92,6 +93,7 @@ import { EqualValidatorDirective } from './form-study/equal-validator.directive'
       deps:[UserService]
     },
     // {provide:listToken,useValue:'app.module.ts'}
+    ...interceptors
   ],
   bootstrap: [AppComponent],
   exports: [
