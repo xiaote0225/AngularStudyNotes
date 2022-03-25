@@ -7,7 +7,7 @@ import { HeroService } from 'src/app/services/hero.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers:[HeroService]
+  providers: [HeroService]
 })
 export class HeroesComponent implements OnInit {
   searchParams: HeroArg = {
@@ -16,8 +16,8 @@ export class HeroesComponent implements OnInit {
     sort: 'desc'
   };
   showSpin = false;
-  heroes:Hero[];
-  constructor(private heroService:HeroService,private cdr:ChangeDetectorRef) {
+  heroes: Hero[];
+  constructor(private heroService: HeroService, private cdr: ChangeDetectorRef) {
     this.heroes = this.heroService.getHeros();
   }
 
@@ -26,24 +26,27 @@ export class HeroesComponent implements OnInit {
     this.getList();
   }
 
-  search(){
+  search() {
     console.log(this.searchParams);
     this.getList();
   }
 
-  reset(){
+  reset() {
     this.searchParams = {
-      name:'',
-      job:'',
-      sort:'desc'
+      name: '',
+      job: '',
+      sort: 'desc'
     };
     this.getList();
   }
 
-  getList(){
+  getList() {
     this.showSpin = true;
     this.heroService.heroes(this.searchParams).subscribe(heroes => {
       this.heroes = heroes;
+      this.showSpin = false;
+      this.cdr.markForCheck();
+    }, () => {
       this.showSpin = false;
       this.cdr.markForCheck();
     });
