@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HeroService } from 'src/app/services/hero.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,9 +28,9 @@ import { AuthModule } from './router-study/auth/auth.module';
 import { LoginModule } from './pages/login/login.module';
 import { NameEditorComponent } from './form-study/响应型/name-editor/name-editor.component';
 import { ProfileEditorComponent } from './form-study/profile-editor/profile-editor.component';
-import { EqualValidatorDirective } from './form-study/equal-validator.directive';
 import { ForbiddenValidatorDirective } from './form-study/forbidden-validator.directive';
 import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.directive';
+import { EqualValidatorDirective } from './form-study/equal-validator.directive';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -53,6 +54,7 @@ import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.d
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
     DemoModule,
@@ -63,7 +65,8 @@ import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.d
     // AdminModule,
     AuthModule,
     LoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}

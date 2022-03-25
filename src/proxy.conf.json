@@ -1,0 +1,11 @@
+{
+  "/api":{
+    "target":"http://10.6.5.152:3333",
+    "secure":false,
+    "changeOrigin":true,
+    "logLevel": "debug",
+    "pathRewrite":{
+      "^/api":""
+    }
+  }
+}

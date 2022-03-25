@@ -17,11 +17,12 @@ export class HeroesComponent implements OnInit {
   };
   showSpin = false;
   heroes:Hero[];
-  constructor(readonly heroService:HeroService) {
+  constructor(private heroService:HeroService) {
     this.heroes = this.heroService.getHeros();
   }
 
   ngOnInit(): void {
+    this.heroService.heroes();
   }
 
   search(){
