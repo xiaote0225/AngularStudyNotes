@@ -6,9 +6,6 @@
           <h2 class="title text-center" routerLink="/home">Hero Management Office</h2>
         </div>
         <div class="col-4">
-          {{currentUser | json}}
-          ===
-          {{!currentUser}}
           <a class="login" routerLink="/login" *ngIf="!currentUser else userTpl">登录</a>
           <ng-template #userTpl>
             <div class="dropdown">

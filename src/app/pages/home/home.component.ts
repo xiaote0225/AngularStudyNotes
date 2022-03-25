@@ -3,6 +3,7 @@ import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Hero } from 'src/app/types';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,23 +23,30 @@ export class HomeComponent implements OnInit {
       //     console.log(this.route.firstChild);
       //   }
       // ),
-      switchMap(() => this.route.firstChild?.data!)
-    ).subscribe(data => {
+      switchMap(() => {
+        return combineLatest(
+          this.route.firstChild?.data!,
+          this.userServe.user$
+        )
+      })
+    ).subscribe(([data,user]) => {
+      console.log('NavigationEnd');
       if(data.breadcrumb?.length){
         this.breadcrumb = data.breadcrumb;
       }
+      this.currentUser = user;
     });
   }
 
   ngOnInit(): void {
     console.log('home ngOnInit-----------------');
-    this.userServe.getUser().subscribe(user => {
-      this.currentUser = user;
-      console.log('home userServe user',this.currentUser);
-      setTimeout(() => {
-        this.cdr.markForCheck();
-      }, 500);
-    });
+    // this.userServe.getUser().subscribe(user => {
+    //   this.currentUser = user;
+    //   console.log('home userServe user',this.currentUser);
+    //   setTimeout(() => {
+    //     this.cdr.markForCheck();
+    //   }, 500);
+    // });
     // this.currentUser$ = this.userServe.getUser();
   }
 
