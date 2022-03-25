@@ -1,5 +1,11 @@
 import { InjectionToken } from "@angular/core";
 
+export interface Base<T>{
+  code:number;
+  message:string;
+  data?:T;
+}
+
 export interface HeroArg {
   name: string;
   job: string;
@@ -28,4 +34,14 @@ export interface AppConfig{
 }
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+
+interface LoginType{
+  user:Hero;
+  token:string;
+}
+
+export interface LoginArg{
+  name:string;
+  password:string;
+}
 
