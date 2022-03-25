@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddHeroComponent implements OnInit {
   formValues: FormGroup;
-  constructor(private fb: FormBuilder) {
+  private submitted = false;
+  constructor(private fb: FormBuilder,private router:Router) {
     this.formValues = this.fb.group({
       name: ['', [
         Validators.required,
@@ -84,11 +86,20 @@ export class AddHeroComponent implements OnInit {
   }
 
   onSubmit():void{
-
+    this.submitted = true;
+    console.log(this.formValues.value);
+    // this.cancel();
   }
 
   cancel():void{
+    this.router.navigate(['/home/heroes']);
+  }
 
+  canDeactivate(){
+    if(this.formValues.dirty && !this.submitted){
+      return confirm('表单未保存，确定离开？');
+    }
+    return true;
   }
 
 
