@@ -1,11 +1,21 @@
+import { Subject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Hero } from '../types';
 
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 export class UserService {
-
-  user = {
-    name: '张三',
-    phone:'123213213'
-  }
+  private sub = new Subject<Hero | null>();
   constructor() { }
+
+  setUser(user:Hero){
+    this.sub.next(user);
+  }
+  getUser():Observable<Hero | null>{
+    return this.sub.asObservable();
+  }
+  clearUser():void{
+    this.sub.next(null);
+  }
 }

@@ -12,8 +12,8 @@ export class UserLoggerService extends LoggerService{
     console.log('--------------userService123',userService);
   }
   log(message:string):void{
-    const name = this.userService.user.name;
-    super.log(`---------Message to ${name}:${message}`);
-    console.log('-------------userService',this.userService);
+    // const name = this.userService.user.name;
+    // super.log(`---------Message to ${name}:${message}`);
+    // console.log('-------------userService',this.userService);
   }
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginArg } from './../../types';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private router:Router,private accountServe:AccountService) { }
+  constructor(private router:Router,private accountServe:AccountService,private userServe:UserService) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
       this.accountServe.login(form.value).subscribe(({user,token}) => {
         localStorage.setItem('h-auth',token);
         alert('登陆成功');
+        alert(user);
+        this.userServe.setUser(user);
         this.router.navigateByUrl('/home/heroes');
       });
     }
