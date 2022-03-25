@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
     console.log('form',form.value);
     if(form.valid){
       this.accountServe.login(form.value).subscribe(({user,token}) => {
-        localStorage.setItem('h-auth',token);
-        alert('登陆成功');
-        alert(user);
+        // localStorage.setItem('h-auth',token);
+        localStorage.setItem('AuthKey',token);
+        // alert(user);
         this.userServe.setUser(user);
+        alert('登陆成功');
         this.router.navigateByUrl('/home/heroes');
       });
     }

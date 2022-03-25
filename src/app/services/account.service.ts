@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AuthKey } from '../configs/constant';
 import { Base, LoginArg, LoginType } from '../configs/types';
 
 @Injectable({
@@ -17,6 +18,15 @@ export class AccountService {
         map((res: Base<LoginType>) => res.data!),
         catchError(error => this.handleError(error))
       );
+  }
+
+  account(auth:string):Observable<LoginType>{
+    return this.http.get<Base<LoginType>>(this.prefix + 'account',{
+      headers: new HttpHeaders({[AuthKey]:auth})
+    }).pipe(
+      map((res:Base<LoginType>) => res.data!),
+      catchError(error => this.handleError(error))
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

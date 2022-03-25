@@ -23,23 +23,27 @@ export class HomeComponent implements OnInit {
       //     console.log(this.route.firstChild);
       //   }
       // ),
-      switchMap(() => {
-        return combineLatest(
-          this.route.firstChild?.data!,
-          this.userServe.user$
-        )
-      })
-    ).subscribe(([data,user]) => {
+      // switchMap(() => {
+      //   return combineLatest(
+      //     this.route.firstChild?.data!,
+      //     this.userServe.user$
+      //   )
+      // })
+      switchMap(() => this.route.firstChild?.data!)
+    ).subscribe(data => {
       console.log('NavigationEnd');
       if(data.breadcrumb?.length){
         this.breadcrumb = data.breadcrumb;
       }
-      this.currentUser = user;
+      // this.currentUser = user;
     });
   }
 
   ngOnInit(): void {
     console.log('home ngOnInit-----------------');
+    this.userServe.user$.subscribe(user => {
+      this.currentUser = user;
+    })
     // this.userServe.getUser().subscribe(user => {
     //   this.currentUser = user;
     //   console.log('home userServe user',this.currentUser);

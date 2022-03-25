@@ -1,6 +1,11 @@
+import { AuthKey } from './configs/constant';
+import { filter, switchMap, tap } from 'rxjs/operators';
+import { UserService } from './services/user.service';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AccountService } from './services/account.service';
+import { EMPTY } from 'rxjs';
 export interface Hero{
   name:string;
   id:number|string;
@@ -26,9 +31,26 @@ export interface Hero{
   // `]
 })
 export class AppComponent{
-  constructor(private router:Router){
-    console.log('------',this.router.onSameUrlNavigation);
-    console.log('environment.baseUrl',environment.baseUrl);
+  constructor(private router:Router,private userServe:UserService,private accoutServe:AccountService){
+    // console.log('------',this.router.onSameUrlNavigation);
+    // console.log('environment.baseUrl',environment.baseUrl);
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart),
+      tap(() => {
+        console.log('app.component--------NavigationStart');
+      }),
+      switchMap((() => this.userServe.user$)),
+      switchMap(user => {
+        const authKey = localStorage.getItem(AuthKey);
+        if(!user && authKey){
+          return this.accoutServe.account(authKey);
+        }
+        return EMPTY;
+      })
+    ).subscribe(({user,token}) => {
+      localStorage.setItem(AuthKey,token);
+      this.userServe.setUser(user);
+    });
   }
 
   toCrisisCenter(){
