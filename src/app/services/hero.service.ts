@@ -23,8 +23,15 @@ export class HeroService {
   heroes(args: HeroArg): Observable<Hero[]> {
     const params = new HttpParams({ fromString: stringify(args) });
     return this.http.get<Base<Hero[]>>(this.prefix + 'list', { params }).pipe(
-      timeout(2000),
+      // timeout(2000),
       map((res: Base<Hero[]>) => res.data!),
+      catchError(error => this.handleError(error))
+    );
+  }
+
+  addHero(args:HeroArg):Observable<any>{
+    return this.http.post<Base<any>>(this.prefix + 'add',args).pipe(
+      map((res:Base<any>) => res.data),
       catchError(error => this.handleError(error))
     );
   }

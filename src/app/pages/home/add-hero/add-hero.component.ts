@@ -1,6 +1,7 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   selector: 'app-add-hero',
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddHeroComponent implements OnInit {
   formValues: FormGroup;
   private submitted = false;
-  constructor(private fb: FormBuilder,private router:Router) {
+  constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute) {
     this.formValues = this.fb.group({
       name: ['', [
         Validators.required,
@@ -89,10 +90,16 @@ export class AddHeroComponent implements OnInit {
     this.submitted = true;
     console.log(this.formValues.value);
     // this.cancel();
+    if(this.formValues.valid){
+      this.heroServe.addHero(this.formValues.value).subscribe(res => {
+        console.log(res);
+      });
+    }
   }
 
   cancel():void{
-    this.router.navigate(['/home/heroes']);
+    // this.router.navigate(['/home/heroes']);
+    this.router.navigate(['../heroes'],{relativeTo:this.route});
   }
 
   canDeactivate(){
