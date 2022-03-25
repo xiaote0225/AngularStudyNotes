@@ -35,7 +35,7 @@ export interface AppConfig{
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-interface LoginType{
+export interface LoginType{
   user:Hero;
   token:string;
 }
