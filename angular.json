@@ -36,8 +36,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -68,6 +67,14 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -84,6 +91,9 @@
             },
             "development": {
               "browserTarget": "AngularStudyNotes:build:development"
+            },
+            "staging":{
+              "browserTarget": "AngularStudyNotes:build:staging"
             }
           },
           "defaultConfiguration": "development"

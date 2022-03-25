@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 export interface Hero{
   name:string;
   id:number|string;
@@ -27,6 +28,7 @@ export interface Hero{
 export class AppComponent{
   constructor(private router:Router){
     console.log('------',this.router.onSameUrlNavigation);
+    console.log('environment.baseUrl',environment.baseUrl);
   }
 
   toCrisisCenter(){

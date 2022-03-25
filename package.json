@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4212 --open",
+    "staging": "ng serve -c=staging",
+    "product": "ng serve --prod",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
