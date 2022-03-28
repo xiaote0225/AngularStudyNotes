@@ -56,7 +56,7 @@ export class AppComponent {
       // localStorage.setItem(AuthKey,token);
       // this.windowServe.setStorage(AuthKey, token);
       // this.userServe.setUser(user);
-      console.log('app set context', res);
+      // console.log('app set context', res);
     });
   }
 

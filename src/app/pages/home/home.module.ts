@@ -1,5 +1,5 @@
-import { UpdateHeroComponent } from './update-hero/update-hero.component';
-import { AddHeroComponent } from './add-hero/add-hero.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddUpdateHeroComponent } from './add-update-hero/add-update-hero.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,11 +10,13 @@ import { HeroesModule } from './heroes/heroes.module';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    AddUpdateHeroComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
+    ReactiveFormsModule,
     HeroesModule
   ]
 })

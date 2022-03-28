@@ -6,33 +6,34 @@ import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   selector: 'app-add-hero',
-  templateUrl: './add-hero.component.html',
-  styleUrls: ['./add-hero.component.scss'],
+  templateUrl: './add-update-hero.component.html',
+  styleUrls: ['./add-update-hero.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddHeroComponent implements OnInit {
-  formValues: FormGroup;
+export class AddUpdateHeroComponent implements OnInit {
+  formValues: FormGroup = this.fb.group({
+    name: ['', [
+      Validators.required,
+      Validators.maxLength(20)
+    ]],
+    gender: ['0', Validators.min(0)],
+    age: ['', Validators.min(0)],
+    phone: ['', [
+      Validators.required,
+      Validators.pattern(/^1\d{10}$/)
+    ]],
+    email: ['', Validators.email],
+    job: ['', Validators.required],
+    role: ['user', Validators.required],
+    brief: ['', [
+      Validators.minLength(8),
+      Validators.maxLength(100)
+    ]]
+  });
+
   private submitted = false;
   constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute,private windowServe:WindowService) {
-    this.formValues = this.fb.group({
-      name: ['', [
-        Validators.required,
-        Validators.maxLength(20)
-      ]],
-      gender: ['0', Validators.min(0)],
-      age: ['', Validators.min(0)],
-      phone: ['', [
-        Validators.required,
-        Validators.pattern(/^1\d{10}$/)
-      ]],
-      email: ['', Validators.email],
-      job: ['', Validators.required],
-      role: ['user', Validators.required],
-      brief: ['', [
-        Validators.minLength(8),
-        Validators.maxLength(100)
-      ]]
-    });
+    console.log('this.route.snapshot.paramMap.get(id)',this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
