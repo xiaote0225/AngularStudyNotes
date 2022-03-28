@@ -1,9 +1,10 @@
 import { UserService } from './../../services/user.service';
 import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Hero } from 'src/app/types';
 import { combineLatest } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   currentUser:Hero | null;
   // currentUser$: Observable<Hero | null>;
   breadcrumb:string[] = [];
-  constructor(private route:ActivatedRoute,private router:Router,private userServe:UserService,private cdr:ChangeDetectorRef) {
+  constructor(private route:ActivatedRoute,private router:Router,private userServe:UserService,private cdr:ChangeDetectorRef,@Inject(DOCUMENT) private doc:Document) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       // tap(() => {
@@ -37,6 +38,8 @@ export class HomeComponent implements OnInit {
       }
       // this.currentUser = user;
     });
+
+    console.log('Document doc',this.doc);
   }
 
   ngOnInit(): void {

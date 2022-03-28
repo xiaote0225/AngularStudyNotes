@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoginArg } from './../../types';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { WindowService } from 'src/app/services/window.service';
+import { AuthKey } from 'src/app/configs/constant';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private router:Router,private accountServe:AccountService,private userServe:UserService) { }
+  constructor(private router:Router,private accountServe:AccountService,private userServe:UserService,private windowServe:WindowService) { }
 
   ngOnInit(): void {
   }
@@ -28,10 +30,12 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.accountServe.login(form.value).subscribe(({user,token}) => {
         // localStorage.setItem('h-auth',token);
-        localStorage.setItem('AuthKey',token);
+        // localStorage.setItem('AuthKey',token);
+        this.windowServe.setStorage(AuthKey,token);
         // alert(user);
         this.userServe.setUser(user);
-        alert('登陆成功');
+        // alert('登陆成功');
+        this.windowServe.alert('登陆成功');
         const to = this.accountServe.redirectTo || '/home/heroes';
         // this.router.navigateByUrl('/home/heroes');
         this.router.navigateByUrl(to).then(() => {

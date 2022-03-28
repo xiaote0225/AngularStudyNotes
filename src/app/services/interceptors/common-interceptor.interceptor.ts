@@ -9,7 +9,8 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, merge } from 'rxjs';
+import { WindowService } from '../window.service';
 
 interface CustomHttpConfig{
   headers?:HttpHeaders;
@@ -18,11 +19,12 @@ interface CustomHttpConfig{
 @Injectable()
 export class CommonInterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private windowServe:WindowService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('拦截器');
-    const auth = localStorage.getItem(AuthKey);
+    // console.log('拦截器');
+    // const auth = localStorage.getItem(AuthKey);
+    const auth = this.windowServe.getStorage(AuthKey);
     let httpConfig:CustomHttpConfig = {};
     if(auth){
       httpConfig = {headers: request.headers.set(AuthKey,auth)};
@@ -33,9 +35,11 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
 
   private handleError(error:HttpErrorResponse):Observable<never>{
     if(typeof error.error?.code === 'number'){
-      alert(error.error.message);
+      // alert(error.error.message);
+      this.windowServe.alert(error.error.message);
     }else{
-      alert('请求失败');
+      // alert('请求失败');
+      this.windowServe.alert('请求失败');
     }
     return throwError(error);
   }
