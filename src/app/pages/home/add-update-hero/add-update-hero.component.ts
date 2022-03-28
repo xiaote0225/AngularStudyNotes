@@ -1,6 +1,6 @@
 import { WindowService } from 'src/app/services/window.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -30,10 +30,14 @@ export class AddUpdateHeroComponent implements OnInit {
       Validators.maxLength(100)
     ]]
   });
-
+  private id = '';
   private submitted = false;
-  constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute,private windowServe:WindowService) {
+  constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute,private windowServe:WindowService,private cdr:ChangeDetectorRef) {
     console.log('this.route.snapshot.paramMap.get(id)',this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    if(this.id){
+      this.getHeroInfo();
+    }
   }
 
   ngOnInit(): void {
@@ -93,12 +97,27 @@ export class AddUpdateHeroComponent implements OnInit {
     console.log(this.formValues.value);
     // this.cancel();
     if(this.formValues.valid){
-      this.heroServe.addHero(this.formValues.value).subscribe(res => {
-        // console.log(res);
-        this.windowServe.alert('新增成功');
-        this.cancel();
-      });
+      if(this.id){
+        this.heroServe.updateHero(this.id,this.formValues.value).subscribe(() => {
+          this.windowServe.alert('修改成功');
+          // this.cancel();
+          this.router.navigate(['../../heroes'],{relativeTo:this.route});
+        });
+      }else{
+        this.heroServe.addHero(this.formValues.value).subscribe(res => {
+          // console.log(res);
+          this.windowServe.alert('新增成功');
+          this.cancel();
+        });
+      }
     }
+  }
+
+  getHeroInfo(){
+    this.heroServe.hero(this.id).subscribe(hero => {
+      this.formValues.patchValue(hero);
+      this.cdr.markForCheck();
+    });
   }
 
   cancel():void{

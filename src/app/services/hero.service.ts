@@ -29,9 +29,9 @@ export class HeroService {
     );
   }
 
-  addHero(args:UpdateHeroArg):Observable<Base<void>>{
-    return this.http.post<Base<any>>(this.prefix + 'add',args).pipe(
-      map((res:Base<any>) => res.data),
+  addHero(args: UpdateHeroArg): Observable<Base<void>> {
+    return this.http.post<Base<any>>(this.prefix + 'add', args).pipe(
+      map((res: Base<any>) => res.data),
       // catchError(error => this.handleError(error))
     );
   }
@@ -45,4 +45,16 @@ export class HeroService {
   //   }
   //   return throwError(error);
   // }
+
+  hero(id: string): Observable<Hero> {
+    return this.http.get<Base<Hero>>(this.prefix + 'detail/' + id).pipe(
+      map((res: Base<Hero>) => res.data!)
+    );
+  }
+
+  updateHero(id: string, args: UpdateHeroArg): Observable<Base<void>> {
+    return this.http.patch<Base<void>>(this.prefix + 'modify/' + id, args).pipe(
+      map((res: Base<void>) => res)
+    );
+  }
 }
