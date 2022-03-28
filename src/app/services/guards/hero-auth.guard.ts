@@ -1,0 +1,34 @@
+import { switchMap } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HeroAuthGuard implements CanActivate {
+  constructor(private userServe: UserService, private router: Router) { }
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
+    const auths: string[] = next.data.auths;
+    return this.userServe.user$.pipe(
+      switchMap(user => {
+        if (user) {
+          if (auths.includes(user.role)) {
+            return of(true);
+          } else {
+            alert('无权限，请联系管理员');
+            return of(false);
+          }
+        }
+        this.router.navigateByUrl('/login').then(() => {
+          alert('请先登陆');
+        });
+        return of(false);
+      })
+    );
+  }
+
+}

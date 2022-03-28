@@ -9,7 +9,9 @@ export class UserService {
   // private sub = new Subject<Hero | null>();
   private sub = new BehaviorSubject<Hero | null>(null);
   readonly user$ = this.sub.asObservable();
-  constructor() { }
+  constructor() {
+    // console.log('UserService constructor 6666666666666666666666666666666666666');
+  }
 
   setUser(user:Hero){
     this.sub.next(user);

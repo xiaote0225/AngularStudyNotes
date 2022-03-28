@@ -44,6 +44,7 @@ export class AppComponent{
         const authKey = localStorage.getItem(AuthKey);
         if(!user && authKey){
           return this.accoutServe.account(authKey);
+          // return this.accoutServe.account();
         }
         return EMPTY;
       })
