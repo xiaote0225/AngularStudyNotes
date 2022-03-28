@@ -11,6 +11,7 @@ import { Base, LoginArg, LoginType } from '../configs/types';
 })
 export class AccountService {
   private prefix = environment.baseUrl + '/hero/';
+  redirectTo = '';
   constructor(private http: HttpClient) { }
   login(args: LoginArg): Observable<LoginType> {
     return this.http.post<Base<LoginType>>(this.prefix + 'login', args)

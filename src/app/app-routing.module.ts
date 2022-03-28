@@ -4,6 +4,7 @@ import { NotFoundComponent } from './router-study/not-found/not-found.component'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComposeMessageComponent } from './router-study/compose-message/compose-message.component';
+import { NoAuthComponent } from './pages/no-auth/no-auth.component';
 
 const namedRoutes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   //   data:{preload:true}
   // },
   {path:'login',loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
+  {path:'no-auth',component:NoAuthComponent,data:{title:'无权限'}},
   {path:'',redirectTo:'/home/heroes',pathMatch:'full'},
   // {path:'**',redirectTo:'/home/heroes'}
   // {path:'**',component:NotFoundComponent}
