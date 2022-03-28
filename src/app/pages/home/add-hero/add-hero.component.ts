@@ -1,3 +1,4 @@
+import { WindowService } from 'src/app/services/window.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +13,7 @@ import { HeroService } from 'src/app/services/hero.service';
 export class AddHeroComponent implements OnInit {
   formValues: FormGroup;
   private submitted = false;
-  constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute) {
+  constructor(private fb: FormBuilder,private router:Router,private heroServe:HeroService,private route:ActivatedRoute,private windowServe:WindowService) {
     this.formValues = this.fb.group({
       name: ['', [
         Validators.required,
@@ -92,7 +93,9 @@ export class AddHeroComponent implements OnInit {
     // this.cancel();
     if(this.formValues.valid){
       this.heroServe.addHero(this.formValues.value).subscribe(res => {
-        console.log(res);
+        // console.log(res);
+        this.windowServe.alert('新增成功');
+        this.cancel();
       });
     }
   }

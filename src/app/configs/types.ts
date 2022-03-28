@@ -45,3 +45,4 @@ export interface LoginArg{
   password:string;
 }
 
+export type UpdateHeroArg = Omit<Hero ,'id' | 'createTime' | 'genderText' | 'jobText'>;

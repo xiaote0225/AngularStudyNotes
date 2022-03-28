@@ -1,7 +1,7 @@
 import { Base } from './../types';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { Hero, HeroArg } from 'src/app/configs/types';
+import { Hero, HeroArg, UpdateHeroArg } from 'src/app/configs/types';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HeroesList } from '../configs/heroes';
@@ -29,7 +29,7 @@ export class HeroService {
     );
   }
 
-  addHero(args:HeroArg):Observable<any>{
+  addHero(args:UpdateHeroArg):Observable<Base<void>>{
     return this.http.post<Base<any>>(this.prefix + 'add',args).pipe(
       map((res:Base<any>) => res.data),
       // catchError(error => this.handleError(error))
