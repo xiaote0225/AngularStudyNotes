@@ -27,6 +27,7 @@ export class WindowService {
     if(this.isBrowser){
       return localStorage.getItem(key);
     }
+    return null;
   }
 
   removeStorage(key:string):void{
