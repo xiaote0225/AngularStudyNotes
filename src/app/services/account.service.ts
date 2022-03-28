@@ -21,10 +21,8 @@ export class AccountService {
       );
   }
 
-  account(auth:string):Observable<LoginType>{
-    return this.http.get<Base<LoginType>>(this.prefix + 'account',{
-      headers: new HttpHeaders({[AuthKey]:auth})
-    }).pipe(
+  account():Observable<LoginType>{
+    return this.http.get<Base<LoginType>>(this.prefix + 'account').pipe(
       map((res:Base<LoginType>) => res.data!)
       // catchError(error => this.handleError(error))
     );

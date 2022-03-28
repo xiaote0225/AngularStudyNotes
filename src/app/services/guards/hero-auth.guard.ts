@@ -1,3 +1,4 @@
+import { ContextService } from './../context.service';
 import { AccountService } from './../account.service';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
@@ -10,12 +11,13 @@ import { WindowService } from '../window.service';
   providedIn: 'root'
 })
 export class HeroAuthGuard implements CanActivate {
-  constructor(private userServe: UserService,private accountServe:AccountService, private router: Router,private windowService:WindowService) { }
+  constructor(private userServe: UserService,private accountServe:AccountService, private router: Router,private windowService:WindowService,private contextServe:ContextService) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
     const auths: string[] = next.data.auths;
-    return this.userServe.user$.pipe(
+    // return this.userServe.user$.pipe(
+    return this.contextServe.setContext().pipe(
       switchMap(user => {
         if (user) {
           if (auths.includes(user.role)) {
