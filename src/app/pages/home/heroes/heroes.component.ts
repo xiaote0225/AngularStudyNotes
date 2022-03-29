@@ -1,3 +1,4 @@
+import { WindowService } from './../../../services/window.service';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Hero, HeroArg } from 'src/app/configs/types';
 import { HeroService } from 'src/app/services/hero.service';
@@ -17,7 +18,7 @@ export class HeroesComponent implements OnInit {
   };
   showSpin = false;
   heroes: Hero[];
-  constructor(private heroService: HeroService, private cdr: ChangeDetectorRef) {
+  constructor(private heroService: HeroService, private cdr: ChangeDetectorRef,private windowServe:WindowService) {
     this.heroes = this.heroService.getHeros();
   }
 
@@ -50,6 +51,16 @@ export class HeroesComponent implements OnInit {
       this.showSpin = false;
       this.cdr.markForCheck();
     });
+  }
+
+  delHero(id:string){
+    const confirm = this.windowServe.confirm('确定删除该英雄');
+    if(confirm){
+      this.heroService.delHero(id).subscribe(() => {
+        this.windowServe.alert('删除成功');
+        this.getList();
+      });
+    }
   }
 
 }

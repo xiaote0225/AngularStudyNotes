@@ -42,5 +42,12 @@ export class WindowService {
     }
   }
 
+  confirm(message:string):boolean{
+    if(this.isBrowser){
+      return window.confirm(message);
+    }
+    return false;
+  }
+
 
 }
