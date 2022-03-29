@@ -8,12 +8,20 @@
         <div class="col-4">
           <a class="login" routerLink="/login" *ngIf="!currentUser else userTpl">登录</a>
           <ng-template #userTpl>
-            <div class="dropdown">
+            <!-- <div class="dropdown">
               <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ currentUser?.name }}</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" routerLink="user-center">个人中心</a>
                 <a class="dropdown-item">退出登陆</a>
               </div>
+            </div> -->
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">{{ currentUser?.name }}</a>
+              <a class="dropdown-item" routerLink="user-center">个人中心</a>
+              <a class="dropdown-item">退出登陆</a>
+              <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              </div> -->
             </div>
           </ng-template>
         </div>

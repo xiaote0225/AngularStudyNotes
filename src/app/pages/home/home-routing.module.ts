@@ -17,12 +17,17 @@ const routes: Routes = [
       {
         path: 'add-hero',
         loadChildren: () => import('./add-update-hero/add-hero.module').then(m => m.AddHeroModule),
-        data: { title: '新增英雄', auths:['admin'], breadcrumb: ['首页', '新增英雄'] }
+        data: { title: '新增英雄', auths: ['admin'], breadcrumb: ['首页', '新增英雄'] }
       },
       {
         path: 'update-hero/:id',
         loadChildren: () => import('./update-hero/update-hero.module').then(m => m.UpdateHeroModule),
-        data: { title: '修改英雄', auths:['admin'], breadcrumb: ['首页', '修改英雄'] }
+        data: { title: '修改英雄', auths: ['admin'], breadcrumb: ['首页', '修改英雄'] }
+      },
+      {
+        path: 'user-center',
+        loadChildren: () => import('./user-center/user-center.module').then(m => m.UserCenterModule),
+        data: { title: '个人中心', breadcrumb: ['个人中心'] }
       },
       { path: '', redirectTo: 'heroes', pathMatch: 'full' },
       { path: '**', redirectTo: 'heroes' }
