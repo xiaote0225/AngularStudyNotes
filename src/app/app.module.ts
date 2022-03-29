@@ -32,6 +32,7 @@ import { ForbiddenValidatorDirective } from './form-study/forbidden-validator.di
 import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.directive';
 import { EqualValidatorDirective } from './form-study/equal-validator.directive';
 import interceptors from './services/interceptors';
+import { CoreModule } from './services/core.module';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -67,7 +68,7 @@ import interceptors from './services/interceptors';
     AuthModule,
     LoginModule,
     ReactiveFormsModule,
-
+    CoreModule
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
