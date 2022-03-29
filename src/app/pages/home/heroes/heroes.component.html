@@ -31,7 +31,7 @@
       </form>
     </div>
   </div>
-  <button routerLink="../add-hero" type="button" class="btn btn-primary btn-add">新增</button>
+  <button *appAuth="['admin']" routerLink="../add-hero" type="button" class="btn btn-primary btn-add">新增</button>
   <!-- <a class="login" routerLink="/home/add-hero">登录</a> -->
   <div class="card">
     <div class="card-body">
@@ -59,8 +59,8 @@
             <td>{{ item.brief }}</td>
             <td class="actions">
               <!-- <button routerLink="../update-hero" type="button" class="btn btn-primary btn-modify">修改</button> -->
-              <button [routerLink]="['../update-hero',item.id]" type="button" class="btn btn-primary btn-modify">修改</button>
-              <button type="button" class="btn btn-danger" (click)="delHero(item.id)">删除</button>
+              <button *appAuth="['admin']" [routerLink]="['../update-hero',item.id]" type="button" class="btn btn-primary btn-modify">修改</button>
+              <button *appAuth="['admin']" type="button" class="btn btn-danger" (click)="delHero(item.id)">删除</button>
             </td>
           </tr>
         </tbody>
