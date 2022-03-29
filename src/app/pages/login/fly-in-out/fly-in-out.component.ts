@@ -1,4 +1,5 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { transAnimation } from './../animates';
+import { trigger, state, style, transition, animate, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Hero } from 'src/app/app.component';
 import { HEROES } from 'src/app/router-study/heroes/mock-heroes';
@@ -13,9 +14,16 @@ import { HEROES } from 'src/app/router-study/heroes/mock-heroes';
       state('in',style({transform:'translateX(20px)'})),
       transition(':enter',[
         style({transform:'translateX(-100%)'}),
-        animate(1000)
+        // animate(1000)
+        useAnimation(transAnimation)
       ]),
-      transition(':leave',animate(500,style({transform:'translateX(100%)'})))
+      // transition(':leave',animate(500,style({transform:'translateX(100%)'})))
+      transition(':leave',useAnimation(transAnimation,{
+        params:{
+          time:'500ms',
+          x:'100%'
+        }
+      }))
     ])
   ]
 })
