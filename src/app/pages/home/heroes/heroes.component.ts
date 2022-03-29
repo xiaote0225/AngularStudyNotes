@@ -1,3 +1,4 @@
+import { first } from 'rxjs/operators';
 import { WindowService } from './../../../services/window.service';
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Hero, HeroArg } from 'src/app/configs/types';
@@ -43,20 +44,29 @@ export class HeroesComponent implements OnInit {
 
   getList() {
     this.showSpin = true;
-    this.heroService.heroes(this.searchParams).subscribe(heroes => {
-      this.heroes = heroes;
-      this.showSpin = false;
-      this.cdr.markForCheck();
-    }, () => {
-      this.showSpin = false;
-      this.cdr.markForCheck();
-    });
+    // this.heroService.heroes(this.searchParams).subscribe(heroes => {
+    //   this.heroes = heroes;
+    //   this.showSpin = false;
+    //   this.cdr.markForCheck();
+    // }, () => {
+    //   this.showSpin = false;
+    //   this.cdr.markForCheck();
+    // });
+    this.heroService.heroes(this.searchParams).pipe(first()).subscribe({
+      next:heroes => {
+        this.heroes = heroes;
+      },
+      complete: () => {
+        this.showSpin = false;
+        this.cdr.markForCheck();
+      }
+    })
   }
 
   delHero(id:string){
     const confirm = this.windowServe.confirm('确定删除该英雄');
     if(confirm){
-      this.heroService.delHero(id).subscribe(() => {
+      this.heroService.delHero(id).pipe(first()).subscribe(() => {
         this.windowServe.alert('删除成功');
         this.getList();
       });

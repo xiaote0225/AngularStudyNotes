@@ -1,3 +1,4 @@
+import { first } from 'rxjs/operators';
 import { WindowService } from 'src/app/services/window.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
@@ -98,13 +99,13 @@ export class AddUpdateHeroComponent implements OnInit {
     // this.cancel();
     if(this.formValues.valid){
       if(this.id){
-        this.heroServe.updateHero(this.id,this.formValues.value).subscribe(() => {
+        this.heroServe.updateHero(this.id,this.formValues.value).pipe(first()).subscribe(() => {
           this.windowServe.alert('修改成功');
           // this.cancel();
           this.router.navigate(['../../heroes'],{relativeTo:this.route});
         });
       }else{
-        this.heroServe.addHero(this.formValues.value).subscribe(res => {
+        this.heroServe.addHero(this.formValues.value).pipe(first()).subscribe(res => {
           // console.log(res);
           this.windowServe.alert('新增成功');
           this.cancel();
@@ -114,7 +115,7 @@ export class AddUpdateHeroComponent implements OnInit {
   }
 
   getHeroInfo(){
-    this.heroServe.hero(this.id).subscribe(hero => {
+    this.heroServe.hero(this.id).pipe(first()).subscribe(hero => {
       this.formValues.patchValue(hero);
       this.cdr.markForCheck();
     });

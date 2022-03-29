@@ -1,6 +1,6 @@
 import { ContextService } from './services/context.service';
 import { AuthKey } from './configs/constant';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, first, switchMap, tap } from 'rxjs/operators';
 import { UserService } from './services/user.service';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
@@ -36,28 +36,32 @@ export class AppComponent {
   constructor(private router: Router, private userServe: UserService, private accoutServe: AccountService, private windowServe: WindowService, private contextServe: ContextService) {
     // console.log('------',this.router.onSameUrlNavigation);
     // console.log('environment.baseUrl',environment.baseUrl);
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationStart),
-      // tap(() => {
-      //   console.log('app.component--------NavigationStart');
-      // }),
-      // switchMap((() => this.userServe.user$)),
-      // switchMap(user => {
-      //   // const authKey = localStorage.getItem(AuthKey);
-      //   const authKey = this.windowServe.getStorage(AuthKey);
-      //   if (!user && authKey) {
-      //     return this.accoutServe.account(authKey);
-      //     // return this.accoutServe.account();
-      //   }
-      //   return EMPTY;
-      // })
-      switchMap(() => this.contextServe.setContext())
-    ).subscribe(res => {
-      // localStorage.setItem(AuthKey,token);
-      // this.windowServe.setStorage(AuthKey, token);
-      // this.userServe.setUser(user);
-      // console.log('app set context', res);
-    });
+
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationStart),
+    //   // tap(() => {
+    //   //   console.log('app.component--------NavigationStart');
+    //   // }),
+    //   // switchMap((() => this.userServe.user$)),
+    //   // switchMap(user => {
+    //   //   // const authKey = localStorage.getItem(AuthKey);
+    //   //   const authKey = this.windowServe.getStorage(AuthKey);
+    //   //   if (!user && authKey) {
+    //   //     return this.accoutServe.account(authKey);
+    //   //     // return this.accoutServe.account();
+    //   //   }
+    //   //   return EMPTY;
+    //   // })
+    //   switchMap(() => this.contextServe.setContext())
+    // ).subscribe(res => {
+    //   // localStorage.setItem(AuthKey,token);
+    //   // this.windowServe.setStorage(AuthKey, token);
+    //   // this.userServe.setUser(user);
+    //   // console.log('app set context', res);
+    // });
+
+    this.contextServe.setContext().pipe(first()).subscribe();
+
   }
 
   toCrisisCenter() {
