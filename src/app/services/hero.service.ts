@@ -30,10 +30,11 @@ export class HeroService {
   }
 
   addHero(args: UpdateHeroArg): Observable<Base<void>> {
-    return this.http.post<Base<any>>(this.prefix + 'add', args).pipe(
-      map((res: Base<any>) => res.data),
-      // catchError(error => this.handleError(error))
-    );
+    // return this.http.post<Base<any>>(this.prefix + 'add', args).pipe(
+    //   map((res: Base<any>) => res.data),
+    //   // catchError(error => this.handleError(error))
+    // );
+    return this.http.post<Base<void>>(this.prefix + 'add',args);
   }
 
   // private handleError(error: HttpErrorResponse): Observable<never> {
@@ -53,8 +54,9 @@ export class HeroService {
   }
 
   updateHero(id: string, args: UpdateHeroArg): Observable<Base<void>> {
-    return this.http.patch<Base<void>>(this.prefix + 'modify/' + id, args).pipe(
-      map((res: Base<void>) => res)
-    );
+    // return this.http.patch<Base<void>>(this.prefix + 'modify/' + id, args).pipe(
+    //   map((res: Base<void>) => res)
+    // );
+    return this.http.patch<Base<void>>(this.prefix + 'modify/' + id, args);
   }
 }

@@ -1,3 +1,5 @@
+import { AuthKey } from './../../configs/constant';
+import { AccountService } from './../../services/account.service';
 import { UserService } from './../../services/user.service';
 import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -5,6 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Inject }
 import { Hero } from 'src/app/types';
 import { combineLatest } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { WindowService } from 'src/app/services/window.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +19,7 @@ export class HomeComponent implements OnInit {
   currentUser:Hero | null;
   // currentUser$: Observable<Hero | null>;
   breadcrumb:string[] = [];
-  constructor(private route:ActivatedRoute,private router:Router,private userServe:UserService,private cdr:ChangeDetectorRef,@Inject(DOCUMENT) private doc:Document) {
+  constructor(private route:ActivatedRoute,private router:Router,private userServe:UserService,private cdr:ChangeDetectorRef,@Inject(DOCUMENT) private doc:Document,private accountServe:AccountService,private windowServe:WindowService) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       // tap(() => {
@@ -40,6 +43,16 @@ export class HomeComponent implements OnInit {
     });
 
     console.log('Document doc',this.doc);
+  }
+
+  logout(){
+    this.accountServe.logout().subscribe(() => {
+      this.windowServe.removeStorage(AuthKey);
+      this.userServe.clearUser();
+      this.router.navigateByUrl('/login').then(() => {
+        this.windowServe.alert('退出成功');
+      });
+    });
   }
 
   ngOnInit(): void {

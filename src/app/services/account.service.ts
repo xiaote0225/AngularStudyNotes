@@ -28,6 +28,10 @@ export class AccountService {
     );
   }
 
+  logout():Observable<Base<void>>{
+    return this.http.get<Base<void>>(this.prefix + 'logout');
+  }
+
   // private handleError(error: HttpErrorResponse): Observable<never> {
   //   // console.error('error', error);
   //   if (typeof error.error?.code === 'number') { // 后台拒绝请求

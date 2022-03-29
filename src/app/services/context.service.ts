@@ -1,4 +1,4 @@
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 import { AuthKey } from './../configs/constant';
 import { Observable, of } from 'rxjs';
 import { AccountService } from './account.service';
@@ -28,7 +28,8 @@ export class ContextService {
               return of(user);
             }
             return this.accountServe.account();
-          })
+          }),
+          first()
         ).subscribe(res => {
           let user:Hero;
           if('token' in res){
