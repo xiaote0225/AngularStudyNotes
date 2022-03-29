@@ -1,8 +1,9 @@
+import { animate, animateChild, group, query, style, transition, trigger } from '@angular/animations';
 import { AuthKey } from './../../configs/constant';
 import { AccountService } from './../../services/account.service';
 import { UserService } from './../../services/user.service';
 import { filter, switchMap } from 'rxjs/operators';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Hero } from 'src/app/types';
 import { combineLatest } from 'rxjs';
@@ -13,7 +14,34 @@ import { WindowService } from 'src/app/services/window.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations:[
+    trigger('routeAnimations',[
+      transition('* <=> *',[
+        style({position:'relative'}),
+        query(':enter,:leave',[
+          style({
+            position:'absolute',
+            top:0,
+            left:0,
+            width:'100%'
+          })
+        ],{optional:true}),
+        query(':enter',[
+          style({left:'-100%'})
+        ],{optional:true}),
+        group([
+          query(':leave',[
+            animate(300,style({left:'100%'}))
+          ],{optional:true}),
+          query(':enter',[
+            animate(300,style({left:0}))
+          ],{optional:true})
+        ]),
+        query(':enter',animateChild())
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   currentUser:Hero | null;
@@ -68,6 +96,10 @@ export class HomeComponent implements OnInit {
     //   }, 500);
     // });
     // this.currentUser$ = this.userServe.getUser();
+  }
+
+  prepareRoute(outlet:RouterOutlet){
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
 }

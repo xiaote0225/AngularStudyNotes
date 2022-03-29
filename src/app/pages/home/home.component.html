@@ -36,8 +36,11 @@
         <li class="breadcrumb-item" *ngFor="let item of breadcrumb">{{item}}</li>
       </ul>
     </nav>
-    <div class="content">
+    <!-- <div class="content">
       <router-outlet></router-outlet>
+    </div> -->
+    <div class="countent" [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
   </div>
 </div>
