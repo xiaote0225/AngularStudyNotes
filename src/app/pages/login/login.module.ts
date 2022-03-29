@@ -9,6 +9,8 @@ import { OpenCloseComponent } from './open-close/open-close.component';
 import { FlyInOutComponent } from './fly-in-out/fly-in-out.component';
 import { InsertRemoveComponent } from './insert-remove/insert-remove.component';
 import { StatusSliderComponent } from './status-slider/status-slider.component';
+import { QueryStaggerComponent } from './query-stagger/query-stagger.component';
+import { FlyInOutGroupComponent } from './fly-in-out-group/fly-in-out-group.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { StatusSliderComponent } from './status-slider/status-slider.component';
     OpenCloseComponent,
     FlyInOutComponent,
     InsertRemoveComponent,
-    StatusSliderComponent
+    StatusSliderComponent,
+    QueryStaggerComponent,
+    FlyInOutGroupComponent
   ],
   imports: [
     CommonModule,

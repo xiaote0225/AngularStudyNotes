@@ -16,7 +16,7 @@ export class AuthDirective implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if(this.auths.length){
       this.userServe.user$.subscribe(user => {
-        if(this.auths.includes(user!.role)){
+        if(this.auths.includes(user ? user.role : '')){
           this.createView();
         }else{
           if(this.hasView){
