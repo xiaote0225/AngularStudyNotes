@@ -33,6 +33,7 @@ import { HasMobileValidatorDirective } from './form-study/has-mobile-validator.d
 import { EqualValidatorDirective } from './form-study/equal-validator.directive';
 import interceptors from './services/interceptors';
 import { CoreModule } from './services/core.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // const routes:Routes =[
 //   {path:'crisis-center',component:CrisisListComponent},
@@ -68,7 +69,8 @@ import { CoreModule } from './services/core.module';
     AuthModule,
     LoginModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule
   ],
   providers: [
     // {provide:HeroService,useClass:HeroService}
